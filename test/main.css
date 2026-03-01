@@ -484,16 +484,11 @@ details.drop > summary:focus-visible{
   backdrop-filter: blur(10px);
 }
 
-/* quand on scroll -> on colle en haut */
 .nav.alt{
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-}
-
-:root.topbar-hidden .nav{
-  top: 0;
 }
 
 #navSpacer{ height: 0; }
