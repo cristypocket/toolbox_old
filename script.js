@@ -62,7 +62,7 @@ const TOOLS = [
     category: "Exercices",
     tags: ["renforcement", "muscle", "abdos"],
     duration: "2-3 min",
-    intervaltimer: { totalSec: 150, exerciseSec: 30, breakSec: 30 },   
+    intervalTimer: { totalSec: 150, exerciseSec: 30, breakSec: 30 },   
     position: "planche",
     intensity: "moyenne",
     modes: ["ok","fatigue_mentale"],
@@ -819,7 +819,6 @@ const modalBody = document.getElementById("modalBody");
 const closeModal = document.getElementById("closeModal");
 
 const breathTimer = document.getElementById("breathTimer");
-const intervalTimer = document.getElementById("intervalTimer");
 const btClose = document.getElementById("btClose");
 const btStart = document.getElementById("btStart");
 const btStop = document.getElementById("btStop");
@@ -828,9 +827,18 @@ const btPhase = document.getElementById("btPhase");
 const btRemaining = document.getElementById("btRemaining");
 const breathOrb = breathTimer ? breathTimer.querySelector(".breath-orb") : null;
 const breathOrbInner = breathTimer ? breathTimer.querySelector(".breath-orb-inner") : null;
+const btCount = document.getElementById("btCount");
+
+const intervalTimer = document.getElementById("intervalTimer");
+const itClose = document.getElementById("itClose");
+const itStart = document.getElementById("itStart");
+const itStop = document.getElementById("itStop");
+const itReset = document.getElementById("itReset");
+const itPhase = document.getElementById("itPhase");
+const itRemaining = document.getElementById("itRemaining");
 const intervalBar = intervalTimer ? intervalTimer.querySelector(".interval-bar") : null;
 const intervalBarInner = intervalTimer ? intervalTimer.querySelector(".interval-bar-inner") : null;
-const btCount = document.getElementById("btCount");
+const itCount = document.getElementById("itCount");
 
 const breath2min = document.getElementById("breath2min");
 const randomTool = document.getElementById("randomTool");
@@ -1393,7 +1401,7 @@ function openTool(id){
 
        btn.addEventListener("click", () => {
          if(tool.intervalTimer){
-           openIntervalTimer(tool.intervalTimer);
+           openintervalTimer(tool.intervalTimer);
          } else if(tool.timer){
            openBreathTimer({ ...tool.timer, sound: true });
            }
@@ -1427,6 +1435,9 @@ let btAnimStart = 0;
 
 const ORB_MIN_SCALE = 1;
 const ORB_MAX_SCALE = 3.0;
+
+const BAR_MIN_SCALE = 1;
+const BAR_MAX_SCALE = 3.0; 
 
 // -------------------------
 // Audio
@@ -1570,12 +1581,12 @@ function btResetAll(){
 // UI helpers Interval Time
 // -------------------------
 
-function btUpdateUI(){
-  if(btRemaining) btRemaining.textContent = fmt(btLeft);
+function itUpdateUI(){
+  if(itRemaining) itRemaining.textContent = fmt(itLeft);
 }
 
-function btUpdateCenterCount(phase, tMs, exerciseMs, breakMs){
-  if(!btCount) return;
+function itUpdateCenterCount(phase, tMs, exerciseMs, breakMs){
+  if(!itCount) return;
 
   let remainingMs;
 
@@ -1586,20 +1597,20 @@ function btUpdateCenterCount(phase, tMs, exerciseMs, breakMs){
   }
 
   const sec = Math.max(1, Math.ceil(remainingMs / 1000));
-  btCount.textContent = String(sec);
+  itCount.textContent = String(sec);
 }
 
-function btStopAll(){
-  btRunning = false;
+function itStopAll(){
+  itRunning = false;
 
-  if(btTick){
-    clearInterval(btTick);
-    btTick = null;
+  if(itTick){
+    clearInterval(itTick);
+    itTick = null;
   }
 
-  if(btAnimId){
-    cancelAnimationFrame(btAnimId);
-    btAnimId = null;
+  if(itAnimId){
+    cancelAnimationFrame(itAnimId);
+    itAnimId = null;
   }
 
   if(intervalBar){
@@ -1607,15 +1618,15 @@ function btStopAll(){
     intervalBar.style.setProperty("--bar-scale", String(BAR_MIN_SCALE));
   } 
 
-  if(btPhase) btPhase.textContent = t("ready");
-  if(btCount) btCount.textContent = "";
+  if(itPhase) itPhase.textContent = t("ready");
+  if(itCount) itCount.textContent = "";
 
 }
 
-function btResetAll(){
-  btStopAll();
-  btLeft = btConfig.totalSec;
-  btUpdateUI();
+function itResetAll(){
+  itStopAll();
+  itLeft = itConfig.totalSec;
+  itUpdateUI();
 }
 
 
@@ -1658,20 +1669,18 @@ function openintervalTimer(options = {}){
   const total = Number(options.totalSec);
   const exe = Number(options.exerciseSec);
   const brk = Number(options.breakSec);
-  const BAR_MIN_SCALE = 1;
-  const BAR_MAX_SCALE = 3.0; 
 
-  btConfig = {
+  itConfig = {
     totalSec: Number.isFinite(total) && total > 0 ? total : 780,
-    exerciseSec: Number.isFinite(inh) && inh > 0 ? exe : 60,
-    breakSec: Number.isFinite(exh) && exh > 0 ? brk : 30
+    exerciseSec: Number.isFinite(exe) && exe > 0 ? exe : 60,
+    breakSec: Number.isFinite(brk) && brk > 0 ? brk : 30
   };
 
-  btLeft = btConfig.totalSec;
+  itLeft = itConfig.totalSec;
   btUpdateUI();
 
-  if(btPhase) btPhase.textContent = "Ready?";
-  if(btCount) btCount.textContent = "";
+  if(itPhase) itPhase.textContent = "Ready?";
+  if(itCount) itCount.textContent = "";
   if(intervalBar) intervalBar.style.setProperty("--bar-scale", String(BAR_MIN_SCALE));
 
   // IMPORTANT : pas de son ici
@@ -1749,25 +1758,25 @@ function btStartRun(){
 // Run Interval timer
 // -------------------------
 
-function btStartRun(){
-  btStopAll();
-  btRunning = true;
+function itStartRun(){
+  itStopAll();
+  itRunning = true;
 
-  btLeft = Math.max(1, btLeft);
-  btUpdateUI();
+  itLeft = Math.max(1, itLeft);
+  itUpdateUI();
 
   if(intervalBar) intervalBar.classList.add("is-running");
 
-  const exerciseMs = btConfig.exerciseSec * 1000;
-  const breakMs = btConfig.breakSec * 1000;
+  const exerciseMs = itConfig.exerciseSec * 1000;
+  const breakMs = itConfig.breakSec * 1000;
   const cycleinterMs  = exerciseMs + breakMs;
 
-  btAnimStart = performance.now();
+  itAnimStart = performance.now();
 
   const step = (now) => {
-    if(!btRunning) return;
+    if(!itRunning) return;
 
-    const elapsed = now - btAnimStart;
+    const elapsed = now - itAnimStart;
     const tCycle = elapsed % cycleinterMs;
 
     const phase = (tCycle < exerciseMs) ? "exercise" : "break";
@@ -1775,11 +1784,11 @@ function btStartRun(){
       ? (tCycle / exerciseMs)
       : ((tCycle - exerciseMs) / breakMs);
 
-    if(btPhase){
-      btPhase.textContent = (phase === "exercise") ? t("exercise") : t("break");
+    if(itPhase){
+      itPhase.textContent = (phase === "exercise") ? t("exercise") : t("break");
     }
 
-    const scale = (phase === "inhale")
+    const scale = (phase === "exercise")
       ? (BAR_MIN_SCALE + (BAR_MAX_SCALE - BAR_MIN_SCALE) * progress)
       : (BAR_MAX_SCALE - (BAR_MAX_SCALE - BAR_MIN_SCALE) * progress);
 
@@ -1787,20 +1796,20 @@ function btStartRun(){
       intervalBar.style.setProperty("--bar-scale", String(scale));
     }
 
-    btUpdateCenterCount(phase, tCycle, exerciseMs, breakMs);
+    itUpdateCenterCount(phase, tCycle, exerciseMs, breakMs);
 
-    btAnimId = requestAnimationFrame(step);
+    itAnimId = requestAnimationFrame(step);
   };
 
-  btAnimId = requestAnimationFrame(step);
+  itAnimId = requestAnimationFrame(step);
 
-  btTick = setInterval(() => {
-    btLeft = Math.max(0, btLeft - 1);
+  itTick = setInterval(() => {
+    itLeft = Math.max(0, itLeft - 1);
     btUpdateUI();
 
-    if(btLeft <= 0){
+    if(itLeft <= 0){
       btStopAll();
-      if(btPhase) btPhase.textContent = t("done");
+      if(itPhase) itPhase.textContent = t("done");
     }
   }, 1000);
 }
@@ -1949,15 +1958,15 @@ function setupEvents(){
   if(btReset) btReset.addEventListener("click", btResetAll);
 
   // Interval timer controls
-  if(btClose && intervalTimer){
-    btClose.addEventListener("click", () => {
-      btStopAll();
+  if(itClose && intervalTimer){
+    itClose.addEventListener("click", () => {
+      itStopAll();
       intervalTimer.close();
     });
   }
-  if(btStart) btStart.addEventListener("click", btStartRun);
-  if(btStop) btStop.addEventListener("click", btStopAll);
-  if(btReset) btReset.addEventListener("click", btResetAll); 
+  if(itStart) itStart.addEventListener("click", itStartRun);
+  if(itStop) itStop.addEventListener("click", itStopAll);
+  if(itReset) itReset.addEventListener("click", itResetAll); 
 }
 
 // -------------------------
@@ -2031,7 +2040,7 @@ function init(){
   loadTheme();
   loadLang();
   setupEvents();
-  setupStickyHeaderNav(); 
+  setupTopbarHide(); 
   render();
 }
 
