@@ -1014,9 +1014,9 @@ details.drop > ul button:active{
 
 .interval-bar{
   position: relative;
-  width: 180px;
-  height: 180px;
-  border-radius: 999px;             
+  width: 20px;
+  height: 240px;
+  border-radius: 8px;             
   margin: 18px auto 10px;
   border: 1px solid var(--line);
   display: grid;
@@ -1026,8 +1026,8 @@ details.drop > ul button:active{
 }
 
 .interval-bar-inner{
-  width: 55px;
-  height: 55px;
+  width: 20px;
+  height: 5px;
   border-radius: 999px;            
   background: linear-gradient(top at 30% 30%,
     color-mix(in srgb, var(--terracotta) 30%, transparent),
