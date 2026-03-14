@@ -62,7 +62,7 @@ const TOOLS = [
     category: "Exercices",
     tags: ["renforcement", "muscle", "abdos"],
     duration: "6 min",
-    timer: { totalSec: 300, inhaleSec: 5, exhaleSec: 5 },   
+    intervaltimer: { totalSec: 150, exerciseSec: 30, breakSec: 30 },   
     position: "planche",
     intensity: "moyenne",
     modes: ["ok","fatigue_mentale"],
@@ -1396,6 +1396,25 @@ function openTool(id){
         }
       }, 0);
     }
+
+    if(tool.intervaltimer){
+      modalBody.innerHTML += `
+        <div style="margin-top:16px;">
+          <button class="btn" id="startToolTimer" type="button">
+            ${escapeHtml(t("start_timer"))}
+          </button>
+        </div>
+      `;
+
+      setTimeout(() => {
+        const btn = document.getElementById("startToolTimer");
+        if(btn){
+          btn.addEventListener("click", () => {
+            openintervalTimer({ ...tool.intervaltimer, sound: false });
+          });
+        }
+      }, 0);
+    } 
   }
 
   safeShowModal(toolModal);
