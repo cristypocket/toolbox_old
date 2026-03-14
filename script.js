@@ -830,10 +830,6 @@ const breathOrbInner = breathTimer ? breathTimer.querySelector(".breath-orb-inne
 const btCount = document.getElementById("btCount");
 
 const intervalTimer = document.getElementById("intervalTimer");
-const itClose = document.getElementById("itClose");
-const itStart = document.getElementById("itStart");
-const itStop = document.getElementById("itStop");
-const itReset = document.getElementById("itReset");
 const itPhase = document.getElementById("itPhase");
 const itRemaining = document.getElementById("itRemaining");
 const intervalBar = intervalTimer ? intervalTimer.querySelector(".interval-bar") : null;
@@ -1958,15 +1954,15 @@ function setupEvents(){
   if(btReset) btReset.addEventListener("click", btResetAll);
 
   // Interval timer controls
-  if(itClose && intervalTimer){
-    itClose.addEventListener("click", () => {
+  if(btClose && intervalTimer){
+    btClose.addEventListener("click", () => {
       itStopAll();
       intervalTimer.close();
     });
   }
-  if(itStart) itStart.addEventListener("click", itStartRun);
-  if(itStop) itStop.addEventListener("click", itStopAll);
-  if(itReset) itReset.addEventListener("click", itResetAll); 
+  if(btStart) btStart.addEventListener("click", btStartRun);
+  if(btStop) btStop.addEventListener("click", btStopAll);
+  if(btReset) btReset.addEventListener("click", btResetAll); 
 }
 
 // -------------------------
