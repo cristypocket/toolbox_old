@@ -266,6 +266,21 @@ details.drop > summary:focus-visible{
   color: var(--ink);
 }
 
+:root[data-theme="dark"] .interval-bar{
+  background: color-mix(in srgb, #a6c4bd24 75%, transparent);
+}
+
+:root[data-theme="dark"] .interval-bar-inner{        
+  background: linear-gradient(top at 30% 30%,
+    color-mix(in srgb, var(--terracotta) 30%, transparent),
+    color-mix(in srgb, var(--sage) 22%, transparent)
+  );
+}
+
+:root[data-theme="dark"] .interval-count{
+  color: var(--ink);
+}
+
 /* =========================
    3. RESET
 ========================= */
@@ -983,6 +998,47 @@ details.drop > ul button:active{
 }
 
 .breath-count{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 30px; 
+  letter-spacing: .5px;
+  color: var(--ink);
+  opacity: .9;
+  pointer-events: none;
+}
+
+/* === Bar === */
+
+.interval-bar{
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;             
+  margin: 18px auto 10px;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--paper) 75%, transparent);
+  box-shadow: var(--shadow-sm);
+}
+
+.interval-bar-inner{
+  width: 55px;
+  height: 55px;
+  border-radius: 999px;            
+  background: linear-gradient(top at 30% 30%,
+    color-mix(in srgb, var(--terracotta) 30%, transparent),
+    color-mix(in srgb, var(--sage) 22%, transparent)
+  );
+  transform: scaleY(var(--bar-scale, 1));   /* <- scale piloté par JS */
+  transition: transform 950ms linear;
+  filter: blur(0.2px);
+}
+
+.interval-count{
   position: absolute;
   inset: 0;
   display: grid;
