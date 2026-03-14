@@ -22,6 +22,18 @@ html{
   scroll-padding-top: var(--nav-h, 0px);
 }
 
+html, body{
+  min-height: 100%;
+  height: auto;
+}
+
+html{
+  background:
+    radial-gradient(1200px 700px at 20% -10%, rgba(45,140,134,.18), transparent 60%),
+    radial-gradient(900px 600px at 85% 10%, rgba(201,116,90,.14), transparent 55%),
+    linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 88%, #000 12%) 70%, var(--bg));
+}
+
 /* =========================
    2. VARIABLES - THEMES
 ========================= */
@@ -52,11 +64,9 @@ html{
 body{
   margin:0;
   color: var(--ink);
-  background:
-    radial-gradient(1200px 700px at 20% -10%, rgba(45,140,134,.18), transparent 60%),
-    radial-gradient(900px 600px at 85% 10%, rgba(201,116,90,.14), transparent 55%),
-    linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 88%, #000 12%) 70%, var(--bg));
-  font-family: var(--font);  
+  background: transparent;
+  font-family: var(--font);
+   -webkit-text-size-adjust: 100%; 
 }
 
 .topbar{
@@ -91,6 +101,14 @@ nav, .nav{
   background: color-mix(in srgb, var(--paper) 88%, transparent);
   border: 1px solid var(--line);
   color: var(--ink);
+}
+
+details.drop > summary:hover{
+  transform: translateY(-1px);
+}
+
+.pill:hover{
+  transform: translateY(-1px);
 }
 
 .fav-count{
@@ -152,6 +170,10 @@ details.drop > summary:focus-visible{
   border-bottom-color: rgba(233,241,238,.10);
 }
 
+:root[data-theme="dark"] .toolbox-footer{ 
+  border-top-color: rgba(233,241,238,.10);
+}
+
 :root[data-theme="dark"] nav,
 :root[data-theme="dark"] .nav{
   background: rgba(10, 14, 13, 0.78);
@@ -165,7 +187,7 @@ details.drop > summary:focus-visible{
 }
 
 :root[data-theme="dark"] .brand-title strong{
-  color: rgba(233,241,238,.95);
+  color: rgba(255,255,255,0.95);
 }
 :root[data-theme="dark"] .brand-title span{
   color: rgba(233,241,238,.60);
@@ -332,7 +354,7 @@ details.drop > summary:focus-visible{
 
 
 /* =========================
-   5. HEADER - TOPBAR
+   5. HEADER - TOPBAR - FOOTER
 ========================= */
 
 .topbar{
@@ -416,6 +438,20 @@ details.drop > summary:focus-visible{
   vertical-align:middle; 
 }
 
+.toolbox-footer {
+  width: 100%;
+  padding: 20px 16px;
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid var(--line);
+}
+
+.toolbox-footer p {
+  margin: 0;
+}
+
 
 /* === MOBILE HEADER LAYOUT === */
 
@@ -475,22 +511,24 @@ details.drop > summary:focus-visible{
 ========================= */
 
 .nav{
-  position: sticky;
-  left: 0;
-  right: 0;
-  top: 80px;
+  position: relative; /* dans le flux au départ */
+  top: 0;
   z-index: 1100;
 
   border-bottom: 1px solid var(--line);
   background: rgba(245,242,234,.6);
   backdrop-filter: blur(10px);
-
-  transition: top 0.2s ease;
 }
 
-:root.topbar-hidden .nav{
+.nav.alt{
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
 }
+
+#navSpacer{ height: 0; }
+#navSpacer.on{ height: var(--nav-h, 0px); }
 
 .nav-inner{
   max-width: var(--max);
@@ -599,6 +637,15 @@ details.drop > summary:focus-visible{
     max-width: 540px;
     min-width: 0;
   }
+  .nav-right .search input,
+  input[type="search"],
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select{
+    font-size: 16px !important;
+  } 
 }
 
 details.drop{
