@@ -61,7 +61,7 @@ const TOOLS = [
     title: "Planche",
     category: "Exercices",
     tags: ["renforcement", "muscle", "abdos"],
-    duration: "6 min",
+    duration: "2-3 min",
     intervaltimer: { totalSec: 150, exerciseSec: 30, breakSec: 30 },   
     position: "planche",
     intensity: "moyenne",
