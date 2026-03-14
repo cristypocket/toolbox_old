@@ -1014,8 +1014,8 @@ details.drop > ul button:active{
 
 .interval-bar{
   position: relative;
-  width: 20px;
-  height: 240px;
+  width: 40px;
+  height: 320px;
   border-radius: 8px;             
   margin: 18px auto 10px;
   border: 1px solid var(--line);
@@ -1026,15 +1026,15 @@ details.drop > ul button:active{
 }
 
 .interval-bar-inner{
-  width: 20px;
+  width: 40px;
   height: 5px;
-  border-radius: 999px;            
+  border-radius: 8px;            
   background: linear-gradient(top at 30% 30%,
     color-mix(in srgb, var(--terracotta) 30%, transparent),
     color-mix(in srgb, var(--sage) 22%, transparent)
   );
-  transform: scaleY(var(--bar-scale, 1));   /* <- scale piloté par JS */
-  transition: transform 950ms linear;
+  transform: scaleY(var(--bar-scale, 2));   /* <- scale piloté par JS */
+  transition: transform 250ms linear;
   filter: blur(0.2px);
 }
 
