@@ -57,6 +57,46 @@ const TOOLS = [
   }
   },
    {
+    id: "planche",
+    title: "Planche",
+    category: "Exercices",
+    tags: ["renforcement", "muscle", "abdos"],
+    duration: "6 min",
+    timer: { totalSec: 300, inhaleSec: 5, exhaleSec: 5 },   
+    position: "planche",
+    intensity: "moyenne",
+    modes: ["ok","fatigue_mentale"],
+    summary: "Renforce ton corps.",
+    steps: [
+      "Positionne toi en planche, sur les mains. Ecarte les pieds à largeur de hanches pour une meilleure stabilité. Regarde le sol et rentre le menton légèrement pour protéger ta nuque.",
+      "Tiens 30 secondes.",
+      "Pendant la pause, mets-toi en posture du chiot. Les genoux au sol, en repos sur tes talons, les bras allongés devant et le front au sol.",
+      "Fais 3 répétitions."
+    ],
+    low: "Version low battery: tiens juste 10 secondes.",
+    stop: "Stop si douleurs ou fourmillements.",
+    note: "Plus tu pratiques, plus tu renforces ton corps et plus c'est facile.",
+
+      i18n: {
+       en: {
+         title: "Planck",
+         category: "Exercise",
+         position: "planck",
+         intensity: "medium",
+         summary: "Strenghten your body.",
+         steps: [
+            "Position yourself in planck posture. Place your feet hip-width apart for better stability. Look at the floor and tuck your chin slightly to protect your neck.",
+            "Hold for 30 seconds.",
+            "During break time, move into puppy pose. Kneel on the floor, resting on your heels, arms extended in front of you, and forehead on the floor.",
+            "Repeat 3 times."
+         ],
+         low: "Low battery version: hold for just 10 seconds.",
+         stop: "Stop if you experience pain or tingling.",
+         note: "The more you practice, the more you strengthen your body and the easier it gets." 
+       }
+     }
+  }, 
+   {
     id: "contracte-relache",
     title: "Contracté–relâché",
     category: "Exercices",
@@ -736,6 +776,8 @@ const TOOLS = [
        }
      }
   }
+
+    
 ];
 
 // -------------------------
@@ -777,6 +819,7 @@ const modalBody = document.getElementById("modalBody");
 const closeModal = document.getElementById("closeModal");
 
 const breathTimer = document.getElementById("breathTimer");
+const intervalTimer = document.getElementById("intervalTimer");
 const btClose = document.getElementById("btClose");
 const btStart = document.getElementById("btStart");
 const btStop = document.getElementById("btStop");
@@ -785,6 +828,8 @@ const btPhase = document.getElementById("btPhase");
 const btRemaining = document.getElementById("btRemaining");
 const breathOrb = breathTimer ? breathTimer.querySelector(".breath-orb") : null;
 const breathOrbInner = breathTimer ? breathTimer.querySelector(".breath-orb-inner") : null;
+const intervalBar = intervalTimer ? intervalTimer.querySelector(".interval-bar") : null;
+const intervalBarInner = intervalTimer ? intervalTimer.querySelector(".interval-bar-inner") : null;
 const btCount = document.getElementById("btCount");
 
 const breath2min = document.getElementById("breath2min");
@@ -859,6 +904,7 @@ const I18N = {
 
     // nav FR
     "nav_exercices": "Exercices",
+    "nav.filters.reinforcement": "Renforcement", 
     "nav.filters.contractRelax":"Contracté–relâché",
     "nav.filters.softMobility":"Mobilisation douce",
     "nav.filters.softStretch":"Étirements doux",
@@ -916,7 +962,8 @@ const I18N = {
     stop: "🔥 Stop si :",
     note: "✨ Note :",
     start_timer: "⏱ Lancer le timer",
-    "timer.title": "🌬 Timer respiration", 
+    "breath.timer.title": "🌬 Timer respiration",
+    "interval.timer.title": "⏱️ Timer à intervale", 
 
     // timer FR
     ready: "Ready?",
@@ -945,6 +992,9 @@ const I18N = {
     "nav.filters.contractRelax":"Contract–relax",
     "nav.filters.softMobility":"Soft mobility",
     "nav.filters.softStretch":"Soft stretch",
+
+    "nav_reinforcement": "Reinforcement",
+    "nav.filters.planck":"Planck",  
      
     "nav_somatic": "Somatic",
     "nav.filters.orientation":"Orientation",
@@ -999,7 +1049,8 @@ const I18N = {
     stop: "🔥 Stop if:",
     note: "✨ Note:",
     start_timer: "⏱ Start timer",
-    "timer.title": "🌬 Breathing timer", 
+    "breath.timer.title": "🌬 Breathing timer",
+    "interval.timer.title": "⏱️ Interval timer", 
 
     // timer EN
     ready: "Ready?",
@@ -1514,7 +1565,61 @@ function btResetAll(){
 }
 
 // -------------------------
-// Open timer
+// UI helpers Interval Time
+// -------------------------
+
+function btUpdateUI(){
+  if(btRemaining) btRemaining.textContent = fmt(btLeft);
+}
+
+function btUpdateCenterCount(phase, tMs, exerciseMs, breakMs){
+  if(!btCount) return;
+
+  let remainingMs;
+
+  if(phase === "exercise"){
+    remainingMs = exerciseMs - tMs;
+  } else {
+    remainingMs = breakMs - (tMs - exerciseMs);
+  }
+
+  const sec = Math.max(1, Math.ceil(remainingMs / 1000));
+  btCount.textContent = String(sec);
+}
+
+function btStopAll(){
+  btRunning = false;
+
+  if(btTick){
+    clearInterval(btTick);
+    btTick = null;
+  }
+
+  if(btAnimId){
+    cancelAnimationFrame(btAnimId);
+    btAnimId = null;
+  }
+
+  if(intervalBar){
+    intervalBar.classList.remove("is-running");
+    intervalBar.style.setProperty("--bar-scale", String(BAR_MIN_SCALE));
+  } 
+
+  if(btPhase) btPhase.textContent = t("ready");
+  if(btCount) btCount.textContent = "";
+
+}
+
+function btResetAll(){
+  btStopAll();
+  btLeft = btConfig.totalSec;
+  btUpdateUI();
+}
+
+
+
+// -------------------------
+// Open breath timer
 // -------------------------
 
 function openBreathTimer(options = {}){
@@ -1544,7 +1649,38 @@ function openBreathTimer(options = {}){
 }
 
 // -------------------------
-// Run
+// Open interval timer
+// -------------------------
+
+function openIntervalTimer(options = {}){
+  const total = Number(options.totalSec);
+  const exe = Number(options.exerciseSec);
+  const brk = Number(options.breakSec);
+  const BAR_MIN_SCALE = 1;
+  const BAR_MAX_SCALE = 3.0; 
+
+  btConfig = {
+    totalSec: Number.isFinite(total) && total > 0 ? total : 780,
+    exerciseSec: Number.isFinite(inh) && inh > 0 ? exe : 60,
+    breakSec: Number.isFinite(exh) && exh > 0 ? brk : 30
+  };
+
+  btLeft = btConfig.totalSec;
+  btUpdateUI();
+
+  if(btPhase) btPhase.textContent = "Ready?";
+  if(btCount) btCount.textContent = "";
+  if(intervalBar) intervalBar.style.setProperty("--bar-scale", String(BAR_MIN_SCALE));
+
+  // IMPORTANT : pas de son ici
+
+  if(intervalTimer){
+    safeShowModal(intervalTimer);
+  }
+}
+
+// -------------------------
+// Run Breath timer
 // -------------------------
 
 function btStartRun(){
@@ -1606,6 +1742,67 @@ function btStartRun(){
     }
   }, 1000);
 }
+
+// -------------------------
+// Run Interval timer
+// -------------------------
+
+function btStartRun(){
+  btStopAll();
+  btRunning = true;
+
+  btLeft = Math.max(1, btLeft);
+  btUpdateUI();
+
+  if(intervalBar) intervalBar.classList.add("is-running");
+
+  const exerciseMs = btConfig.exerciseSec * 1000;
+  const breakMs = btConfig.breakSec * 1000;
+  const cycleinterMs  = exerciseMs + breakMs;
+
+  btAnimStart = performance.now();
+
+  const step = (now) => {
+    if(!btRunning) return;
+
+    const elapsed = now - btAnimStart;
+    const tCycle = elapsed % cycleinterMs;
+
+    const phase = (tCycle < exerciseMs) ? "exercise" : "break";
+    const progress = (phase === "exercise")
+      ? (tCycle / exerciseMs)
+      : ((tCycle - exerciseMs) / breakMs);
+
+    if(btPhase){
+      btPhase.textContent = (phase === "exercise") ? t("exercise") : t("break");
+    }
+
+    const scale = (phase === "inhale")
+      ? (BAR_MIN_SCALE + (BAR_MAX_SCALE - BAR_MIN_SCALE) * progress)
+      : (BAR_MAX_SCALE - (BAR_MAX_SCALE - BAR_MIN_SCALE) * progress);
+
+    if(intervalBar){
+      intervalBar.style.setProperty("--bar-scale", String(scale));
+    }
+
+    btUpdateCenterCount(phase, tCycle, exerciseMs, breakMs);
+
+    btAnimId = requestAnimationFrame(step);
+  };
+
+  btAnimId = requestAnimationFrame(step);
+
+  btTick = setInterval(() => {
+    btLeft = Math.max(0, btLeft - 1);
+    btUpdateUI();
+
+    if(btLeft <= 0){
+      btStopAll();
+      if(btPhase) btPhase.textContent = t("done");
+    }
+  }, 1000);
+}
+
 
 // -------------------------
 // Events
@@ -1748,6 +1945,17 @@ function setupEvents(){
   if(btStart) btStart.addEventListener("click", btStartRun);
   if(btStop) btStop.addEventListener("click", btStopAll);
   if(btReset) btReset.addEventListener("click", btResetAll);
+
+  // Interval timer controls
+  if(btClose && intervalTimer){
+    btClose.addEventListener("click", () => {
+      btStopAll();
+      intervalTimer.close();
+    });
+  }
+  if(btStart) btStart.addEventListener("click", btStartRun);
+  if(btStop) btStop.addEventListener("click", btStopAll);
+  if(btReset) btReset.addEventListener("click", btResetAll); 
 }
 
 // -------------------------
