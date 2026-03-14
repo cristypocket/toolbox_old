@@ -1630,10 +1630,8 @@ function itStopAll(){
   }
 
   if(intervalBar){
-    intervalBar.classList.remove("is-running");}
-  
-  if(intervalBarInner){
-    intervalBarInner.style.setProperty("--bar-scale", String(BAR_MIN_SCALE));
+    intervalBar.classList.remove("is-running");
+    intervalBar.style.setProperty("--bar-scale", String(BAR_MIN_SCALE));
   } 
 
   if(itPhase) itPhase.textContent = t("ready");
@@ -1811,7 +1809,7 @@ function itStartRun(){
       : (BAR_MAX_SCALE - (BAR_MAX_SCALE - BAR_MIN_SCALE) * progress);
 
     if(intervalBar){
-      intervalBarInner.style.setProperty("--bar-scale", String(scale));
+      intervalBar.style.setProperty("--bar-scale", String(scale));
     }
 
     itUpdateCenterCount(phase, tCycle, exerciseMs, breakMs);
