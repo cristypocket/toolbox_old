@@ -11,7 +11,7 @@ const TOOLS = [
       // --- Cartes Exercices - Renforcement --- //
 
     {
-    id: "planche",
+    id: "planche-10",
     title: "Planche 3x 10 sec",
     category: "Exercices",
     tags: ["renforcement", "muscle", "abdos"],
@@ -30,10 +30,13 @@ const TOOLS = [
       "Pendant la pause, mets-toi en posture du chiot. Les genoux au sol, en repos sur tes talons, les bras allongés devant et le front au sol.",
       "Fais 3 répétitions."
     ],
+       low: "Version low battery: fais juste 2 répétitions.",
+       stop: "Stop si douleurs ou fourmillements.",
+       note: "Plus tu pratiques, plus tu renforces ton corps et plus c'est facile.",
 
       i18n: {
        en: {
-         title: "Planck",
+         title: "Planck 3x 10sec",
          category: "Exercise",
          position: "planck",
          intensity: "Very soft",
@@ -51,7 +54,7 @@ const TOOLS = [
       }
     },
    {
-    id: "planche",
+    id: "planche-30",
     title: "Planche 3x 30 sec",
     category: "Exercices",
     tags: ["renforcement", "muscle", "abdos"],
@@ -73,7 +76,7 @@ const TOOLS = [
 
       i18n: {
        en: {
-         title: "Planck",
+         title: "Planck 3x 30sec",
          category: "Exercise",
          position: "planck",
          intensity: "moderate",
@@ -135,7 +138,7 @@ const TOOLS = [
   }   
    },
    {
-      id: "contracte-relache",
+      id: "contracte-relache-omoplates",
       title: "Contracté–relâché des omoplates",
       category: "Exercices",
       tags: ["Contracté–relâché", "stress", "douleur", "relâchement"],
