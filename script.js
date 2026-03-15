@@ -4,61 +4,55 @@
 ========================= */
 
 // -------------------------
-// DATA (Starter pack)
+// DATA (Fiches)
 // -------------------------
 const TOOLS = [
-   {
-    id: "bodyscan",
-    title: "Body scan",
-    category: "Somatique",
-    tags: ["Orientation","ancrage","somatique","surcharge","cohérence cardiaque","respiration","stress","douleurs"],
-    duration: "2-4 min",
-    position: "allongé",
-    intensity: "très doux",
-    modes: ["fatigue_mentale","fatigue_emo","fatigue_phys","douleurs","sos"],
-    summary: "On scan le corps des pieds à la tête, calmement.",
+    
+      // --- Cartes Exercices - Renforcement --- //
+
+    {
+    id: "planche",
+    title: "Planche 3x 10 sec",
+    category: "Exercices",
+    tags: ["renforcement", "muscle", "abdos"],
+    duration: "1-2 min",
+    intervalTimer: { totalSec: 90, exerciseSec: 10, breakSec: 30 },   
+    position: "planche",
+    intensity: "Très doux",
+    modes: ["ok","fatigue_mentale"],
+    summary: "Renforce ton corps.",
     steps: [
-      "Respire tranquillement.",
-      "Commence par sentir tes pieds, tes orteils, remue les légérement si besoin, juste pour t'y connecter.",
-      "Remonte tranquillement, en sentant tes chevilles, puis tes mollets, tes genoux, tes cuisses.",
-      "Note mentalement si tu sens des tensions.",
-      "Continue avec ton bassin, le bas de ton dos, remonte doucement en prenant le temps de sentir chaque muscle.",
-      "Puis tes mains, tes poignets, remonte jusqu'aux coudes, puis les épaule, le haut du dos.",
-      "Est-ce que ça tire? Note le mentalement.",
-      "Puis enfin ta nuque, ta gorge, ta mâchoire, tes pomettes, ton front et le haut de ton crâne.",
-      "Respire calmement."
+      "Positionne toi en planche, sur les mains.",
+      "Si tu préfères te positionner sur les coudes, fais bien attention à abaisser tes omoplates.", 
+      "Ecarte les pieds à largeur de hanches pour une meilleure stabilité.",
+      "Regarde le sol et rentre le menton légèrement pour protéger ta nuque.",
+      "Tiens 10 secondes.",
+      "Pendant la pause, mets-toi en posture du chiot. Les genoux au sol, en repos sur tes talons, les bras allongés devant et le front au sol.",
+      "Fais 3 répétitions."
     ],
-    low: "Version low battery : juste le scan.",
-    stop: "Stop si douleurs trop fortes.",
-    note: "A faire idéalement avant des étirements ou cohérence cardiaque, et après pour noter une éventuellement différence.",
-   
-   i18n: {
-    en: {
-      title: "Body scan",
-      category: "Somatic",
-      position: "lying down",
-      intensity: "very gentle",
-      summary: "Scan the body from feet to head, calmly.",
-      steps: [
-        "Breathe gently.",
-        "Start by noticing your feet and toes; wiggle them slightly if needed, just to connect.",
-        "Move up slowly: ankles, calves, knees, thighs.",
-        "Mentally note any tension you notice.",
-        "Continue with your pelvis and lower back; move up slowly, taking time to feel each muscle.",
-        "Then your hands and wrists, up to elbows, shoulders, and upper back.",
-        "Is anything pulling or tight? Note it.",
-        "Finally your neck, throat, jaw, cheeks, forehead, and the top of your head.",
-        "Keep breathing calmly."
-      ],
-      low: "Low battery version: just do the scan.",
-      stop: "Stop if pain becomes too intense.",
-      note: "Ideally do this before stretching or heart coherence, and again after to notice any change."
-    }
-  }
-  },
+
+      i18n: {
+       en: {
+         title: "Planck",
+         category: "Exercise",
+         position: "planck",
+         intensity: "Very soft",
+         summary: "Strenghten your body.",
+         steps: [
+            "Position yourself in planck posture, on your hands.",
+            "If you prefer to stand on your elbows, make sure to lower your shoulder plates.",
+            "Place your feet hip-width apart for better stability.",
+            "Look at the floor and tuck your chin slightly to protect your neck.",
+            "Hold for 10 seconds.",
+            "During break time, move into puppy pose. Kneel on the floor, resting on your heels, arms extended in front of you, and forehead on the floor.",
+            "Repeat 3 times."
+          ]
+        }
+      }
+    },
    {
     id: "planche",
-    title: "Planche",
+    title: "Planche 3x 30 sec",
     category: "Exercices",
     tags: ["renforcement", "muscle", "abdos"],
     duration: "2-3 min",
@@ -95,10 +89,13 @@ const TOOLS = [
          note: "The more you practice, the more you strengthen your body and the easier it gets." 
        }
      }
-  }, 
+  },
+
+    // --- Cartes Exercices - Contracté-Relaché --- //
+   
    {
     id: "contracte-relache",
-    title: "Contracté–relâché",
+    title: "Contracté–relâché pour le stress",
     category: "Exercices",
     tags: ["Contracté–relâché", "stress", "douleur", "relâchement"],
     duration: "5 min",
@@ -137,6 +134,50 @@ const TOOLS = [
     }
   }   
    },
+   {
+      id: "contracte-relache",
+      title: "Contracté–relâché des omoplates",
+      category: "Exercices",
+      tags: ["Contracté–relâché", "stress", "douleur", "relâchement"],
+      duration: "3 min",
+      position: "A quatre pattes",
+      intensity: "doux",
+      modes: ["ok","fatigue_phys","fatigue_mentale","courbatures","sos"],
+      summary: "Relâcher les tensions sans forcer, en alternant contraction légère et détente.",
+      steps: [
+         "Inspire doucement en position neutre.",
+         "Souffle en poussant sur tes mains pour faire le dos rond, enroule ta tête en direction de ton torse en rentrant le menton.",
+         "Inspire en revenant en position neutre.",
+         "Souffle en creusant le torse, comme si tes omoplates pouvaient se toucher.",
+         "Inspire en revenant en position neutre.", 
+         "Répète 6 fois."
+      ],
+      low: "Version low battery : reduis l'amplitude des mouvements.",
+      stop: "Stop si douleur articulaire inhabituelle, vertige, crispation.",
+      note: "Ce n’est pas la performance qui apaise. C’est la permission.",
+      
+      i18n: {
+         en: {
+            title: "Shoulder plates contract-Relax",
+            category: "Exercises",
+            position: "On all fours",
+            intensity: "gentle",
+            summary: "Release tension without forcing it, by alternating light contraction and relaxation.",
+            steps: [
+               "Inhale gently through your nose in a neutral position.",
+               "Exhale through your mouth as you push through your hands to round your back, rolling your head towards your chest and tucking your chin.",
+               "Inhale as you return to a neutral position.",
+               "Exhale as you draw your chest in, as if your shoulder blades could touch.",
+               "Inhale as you return to a neutral position.",
+               "Repeat 6 times."
+            ],
+       low: "Low battery version: reduce the range of movement.",
+       stop: "Stop if you experience unusual joint pain, dizziness, or muscle tension.",
+       note: "It is not performance that brings peace. It is permission."
+    }
+  }   
+   },
+   
   {
     id: "mobilisation-douce",
     title: "Mobilisation douce",
@@ -217,6 +258,58 @@ const TOOLS = [
     }
   }  
   },
+   
+   // --- Cartes somatiques --- //
+   
+   {
+    id: "bodyscan",
+    title: "Body scan",
+    category: "Somatique",
+    tags: ["Orientation","ancrage","somatique","surcharge","cohérence cardiaque","respiration","stress","douleurs"],
+    duration: "2-4 min",
+    position: "allongé",
+    intensity: "très doux",
+    modes: ["fatigue_mentale","fatigue_emo","fatigue_phys","douleurs","sos"],
+    summary: "On scan le corps des pieds à la tête, calmement.",
+    steps: [
+      "Respire tranquillement.",
+      "Commence par sentir tes pieds, tes orteils, remue les légérement si besoin, juste pour t'y connecter.",
+      "Remonte tranquillement, en sentant tes chevilles, puis tes mollets, tes genoux, tes cuisses.",
+      "Note mentalement si tu sens des tensions.",
+      "Continue avec ton bassin, le bas de ton dos, remonte doucement en prenant le temps de sentir chaque muscle.",
+      "Puis tes mains, tes poignets, remonte jusqu'aux coudes, puis les épaule, le haut du dos.",
+      "Est-ce que ça tire? Note le mentalement.",
+      "Puis enfin ta nuque, ta gorge, ta mâchoire, tes pomettes, ton front et le haut de ton crâne.",
+      "Respire calmement."
+    ],
+    low: "Version low battery : juste le scan.",
+    stop: "Stop si douleurs trop fortes.",
+    note: "A faire idéalement avant des étirements ou cohérence cardiaque, et après pour noter une éventuellement différence.",
+   
+   i18n: {
+    en: {
+      title: "Body scan",
+      category: "Somatic",
+      position: "lying down",
+      intensity: "very gentle",
+      summary: "Scan the body from feet to head, calmly.",
+      steps: [
+        "Breathe gently.",
+        "Start by noticing your feet and toes; wiggle them slightly if needed, just to connect.",
+        "Move up slowly: ankles, calves, knees, thighs.",
+        "Mentally note any tension you notice.",
+        "Continue with your pelvis and lower back; move up slowly, taking time to feel each muscle.",
+        "Then your hands and wrists, up to elbows, shoulders, and upper back.",
+        "Is anything pulling or tight? Note it.",
+        "Finally your neck, throat, jaw, cheeks, forehead, and the top of your head.",
+        "Keep breathing calmly."
+      ],
+      low: "Low battery version: just do the scan.",
+      stop: "Stop if pain becomes too intense.",
+      note: "Ideally do this before stretching or heart coherence, and again after to notice any change."
+    }
+  }
+  }, 
   {
     id: "orientation",
     title: "Orientation",
@@ -377,6 +470,9 @@ const TOOLS = [
        }
      }   
   },
+
+    // --- Cartes Respiration --- //
+
   {
     id: "coherence",
     title: "Cohérence cardiaque",
@@ -783,18 +879,21 @@ const TOOLS = [
 // -------------------------
 // State
 // -------------------------
+
 const state = {
-  mode: "",
-  query: "",
-  filter: "",
-  showFavs: false,
-  favorites: new Set(),
-  lang: "fr", 
+   mode: "",
+   intensityfilter: "",
+   query: "",
+   filter: "",
+   showFavs: false,
+   favorites: new Set(),
+   lang: "fr", 
 };
 
 // -------------------------
 // Storage keys
 // -------------------------
+
 const LS_FAVS = "toolbox_favorites_v1";
 const LS_THEME = "toolbox_theme_v1";
 const LS_LANG = "toolbox_lang_v1";
@@ -1266,12 +1365,18 @@ function matchesFavs(tool){
   return state.favorites.has(tool.id);
 }
 
+function matchesIntensity(tool){
+  if(!state.intensityFilter) return true;
+  return normalize(tool.intensity).includes(normalize(state.intensityFilter));
+}
+
 function getFilteredTools(){
-  return TOOLS
-    .filter(matchesMode)
-    .filter(matchesQuery)
-    .filter(matchesFilter)
-    .filter(matchesFavs);
+   return TOOLS
+      .filter(matchesMode)
+      .filter(matchesQuery)
+      .filter(matchesFilter)
+      .filter(matchesIntensity)
+      .filter(matchesFavs);
 }
 
 // -------------------------
@@ -1301,28 +1406,32 @@ function render(){
     return;
   }
 
-  items.forEach(tool => {
-    const isFav = state.favorites.has(tool.id);
-
-    const sosChip = (tool.modes && tool.modes.includes("sos")) ? `<span class="chip sos">🔥</span>` : "";
-    const okChip  = (tool.modes && tool.modes.includes("ok")) ? `<span class="chip ok">🌿</span>` : "";
-    const physChip = (tool.modes && tool.modes.includes("fatigue_phys")) ? `<span class="chip fatique_phys">🫩</span>` : "";
-    const mentChip = (tool.modes && tool.modes.includes("fatigue_mentale")) ? `<span class="chip fatique_mentale">🤯</span>` : "";
-    const emoChip  = (tool.modes && tool.modes.includes("fatigue_emo")) ? `<span class="chip fatigue_emo">🥺</span>` : "";
-    const courbChip = (tool.modes && tool.modes.includes("courbatures")) ? `<span class="chip courbatures">😬</span>` : "";
-    const doulChip = (tool.modes && tool.modes.includes("douleurs")) ? `<span class="chip douleurs">😣</span>` : "";
-
-    const card = document.createElement("article");
-    card.className = "card";
-
-    card.innerHTML = `
+   items.forEach(tool => {
+      const isFav = state.favorites.has(tool.id);
+      
+      const sosChip = (tool.modes && tool.modes.includes("sos")) ? `<span class="chip sos">🔥</span>` : "";
+      const okChip  = (tool.modes && tool.modes.includes("ok")) ? `<span class="chip ok">🌿</span>` : "";
+      const physChip = (tool.modes && tool.modes.includes("fatigue_phys")) ? `<span class="chip fatique_phys">🫩</span>` : "";
+      const mentChip = (tool.modes && tool.modes.includes("fatigue_mentale")) ? `<span class="chip fatique_mentale">🤯</span>` : "";
+      const emoChip  = (tool.modes && tool.modes.includes("fatigue_emo")) ? `<span class="chip fatigue_emo">🥺</span>` : "";
+      const courbChip = (tool.modes && tool.modes.includes("courbatures")) ? `<span class="chip courbatures">😬</span>` : "";
+      const doulChip = (tool.modes && tool.modes.includes("douleurs")) ? `<span class="chip douleurs">😣</span>` : "";
+      
+      const tresdouxChip = (tool.intensity && tool.intensity.includes("très doux")) ? `<span class="chip tresdoux">🌱 Très doux</span>` : "";
+      const douxChip  = (tool.intensity && tool.intensity.includes("doux")) ? `<span class="chip doux">🌿 Doux</span>` : "";
+      const moyenChip = (tool.intensity && tool.intensity.includes("moyenne")) ? `<span class="chip moyen">🌤 Moyen</span>` : "";
+      const eleveChip = (tool.intensity && tool.intensity.includes("élevée")) ? `<span class="chip eleve">💪 Élevé</span>` : "";
+      
+      const card = document.createElement("article");
+      card.className = "card";
+      
+      card.innerHTML = `
       <div>
         <h3>${escapeHtml(toolText(tool,"title") || "")}</h3>
 
         <div class="meta">
           <span class="chip">${escapeHtml(toolText(tool,"category") || "")}</span>
           <span class="chip">${escapeHtml(tool.duration || "")}</span>
-          <span class="chip">${escapeHtml(toolText(tool,"intensity") || "")}</span>
           ${sosChip}
           ${okChip}
           ${physChip}
@@ -1330,6 +1439,10 @@ function render(){
           ${emoChip}
           ${doulChip}
           ${courbChip}
+          ${tresdouxChip}
+          ${douxChip}
+          ${moyenChip}
+          ${eleveChip}
         </div>
 
         <p style="margin-top:10px;">${escapeHtml(toolText(tool,"summary") || "")}</p>
@@ -1374,7 +1487,6 @@ function openTool(id){
       <span class="chip">${escapeHtml(toolText(tool,"category") || "")}</span>
       <span class="chip">${escapeHtml(tool.duration || "")}</span>
       <span class="chip">${escapeHtml(toolText(tool,"position") || "")}</span>
-      <span class="chip">${escapeHtml(toolText(tool,"intensity") || "")}</span>
     `;
   }
 
@@ -1889,13 +2001,14 @@ function itStartRun(){
 function setupEvents(){
 
   // Dropdown behavior
-  document.addEventListener("click", (e) => {
+  
+   document.addEventListener("click", (e) => {
     document.querySelectorAll("details.drop").forEach(d => {
       if(!d.contains(e.target)) d.open = false;
     });
-  });
+   });
 
-  document.querySelectorAll("details.drop").forEach(d => {
+   document.querySelectorAll("details.drop").forEach(d => {
     d.addEventListener("toggle", () => {
       if(!d.open) return;
       document.querySelectorAll("details.drop").forEach(other => {
@@ -1903,6 +2016,7 @@ function setupEvents(){
       });
     });
   });
+
 
   // Filter buttons
     document.querySelectorAll("[data-filter]").forEach(btn => {
@@ -1920,6 +2034,15 @@ function setupEvents(){
        render();
        });
     });
+
+   document.querySelectorAll("[data-intensity]").forEach(btn => {
+      btn.addEventListener("click", () => {
+         state.intensityFilter = btn.getAttribute("data-intensity") || "";
+         document.querySelectorAll("[data-intensity]").forEach(x => x.setAttribute("aria-pressed","false"));
+         btn.setAttribute("aria-pressed","true");
+         render();
+      });
+   });
 
   // Mode pills
   document.querySelectorAll(".pill").forEach(p => {
@@ -1940,25 +2063,31 @@ function setupEvents(){
   }
 
   // Reset filters
-  if(clearFiltersBtn){
-    clearFiltersBtn.addEventListener("click", () => {
-      state.mode = "";
-      state.query = "";
-      state.filter = "";
-      state.showFavs = false;
-
-      if(searchInput) searchInput.value = "";
+   if(clearFiltersBtn){
+      clearFiltersBtn.addEventListener("click", () => {
+         state.mode = "";
+         state.query = "";
+         state.filter = "";
+         state.showFavs = false;
+         state.intensityFilter = "";
+         
+   if(searchInput) searchInput.value = "";
 
       // reset pills UI
-      document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
-      const okBtn = document.querySelector('.pill[data-mode="ok"]');
-      if(okBtn) okBtn.setAttribute("aria-pressed","true");
 
-      if(favBtn) favBtn.setAttribute("aria-pressed","false");
-
-      render();
-    });
-  }
+         document.querySelectorAll("[data-intensity]").forEach(x => x.setAttribute("aria-pressed","false"));
+         const allIntensityBtn = document.querySelector('.intensity-pill[data-intensity=""]');
+         if(allIntensityBtn) allIntensityBtn.setAttribute("aria-pressed","true");
+         
+         document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
+         const okBtn = document.querySelector('.pill[data-mode="ok"]');
+         if(okBtn) okBtn.setAttribute("aria-pressed","true");
+         
+         if(favBtn) favBtn.setAttribute("aria-pressed","false");
+         
+         render();
+      });
+   }
 
   // Favorites toggle
   if(favBtn){
