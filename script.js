@@ -1405,7 +1405,7 @@ function openTool(id){
 
        btn.addEventListener("click", () => {
          if(tool.intervalTimer){
-           openIntervalTimer(tool.intervalTimer);
+           openIntervalTimer({ ...tool.intervalTimer, sound: true });
          } else if(tool.timer){
            openBreathTimer({ ...tool.timer, sound: true });
            }
@@ -1539,6 +1539,90 @@ function btUpdateSound(phase, progress){
 }
 
 // -------------------------
+// Audio
+// -------------------------
+let audioCtx = null;
+let noiseSrc = null;
+let noiseGain = null;
+let noiseFilter = null;
+
+function itAudioSupported(){
+  return !!(window.AudioContext || window.webkitAudioContext);
+}
+
+function itEnsureAudio(){
+  if(audioCtx || !itAudioSupported()) return;
+
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  audioCtx = new Ctx();
+
+  const seconds = 2;
+  const buffer = audioCtx.createBuffer(1, audioCtx.sampleRate * seconds, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for(let i = 0; i < data.length; i++){
+    data[i] = (Math.random() * 2 - 1);
+  }
+
+  noiseSrc = audioCtx.createBufferSource();
+  noiseSrc.buffer = buffer;
+  noiseSrc.loop = true;
+
+  noiseFilter = audioCtx.createBiquadFilter();
+  noiseFilter.type = "lowpass";
+  noiseFilter.frequency.value = 450;
+
+  noiseGain = audioCtx.createGain();
+  noiseGain.gain.value = 0.0001;
+
+  noiseSrc.connect(noiseFilter);
+  noiseFilter.connect(noiseGain);
+  noiseGain.connect(audioCtx.destination);
+
+  noiseSrc.start();
+}
+
+function itSetSound(on){
+  itConfig.sound = !!on;
+
+  if(!itConfig.sound){
+    if(noiseGain && audioCtx){
+      noiseGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.08);
+    }
+    return;
+  }
+
+  itEnsureAudio();
+
+  if(audioCtx && audioCtx.state === "suspended"){
+    audioCtx.resume().catch(() => {});
+  }
+
+  if(noiseGain && audioCtx){
+    noiseGain.gain.setTargetAtTime(0.018, audioCtx.currentTime, 0.12);
+  }
+}
+
+function itUpdateSound(phase, progress){
+  if(!itConfig.sound || !audioCtx || !noiseGain || !noiseFilter) return;
+
+  const cutoffExercise = 900;
+  const cutoffBreak = 420;
+
+  const cutoff = (phase === "exercise")
+    ? (cutoffBreak + (cutoffExercise - cutoffBreak) * progress)
+    : (cutoffExercise - (cutoffExercise - cutoffBreak) * progress);
+
+  noiseFilter.frequency.setTargetAtTime(cutoff, audioCtx.currentTime, 0.12);
+
+  const vol = (phase === "break")
+    ? (0.020 + 0.006 * progress)
+    : (0.018 + 0.004 * progress);
+
+  noiseGain.gain.setTargetAtTime(vol, audioCtx.currentTime, 0.15);
+}
+
+
+// -------------------------
 // UI helpers
 // -------------------------
 
@@ -1637,6 +1721,9 @@ function itStopAll(){
   if(itPhase) itPhase.textContent = t("ready");
   if(itCount) itCount.textContent = "";
 
+  if(noiseGain && audioCtx){
+    noiseGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.08);
+  } 
 }
 
 function itResetAll(){
@@ -1783,6 +1870,8 @@ function itStartRun(){
 
   if(intervalBar) intervalBar.classList.add("is-running");
 
+  itSetSound(itConfig.sound);
+   
   const exerciseMs = itConfig.exerciseSec * 1000;
   const breakMs = itConfig.breakSec * 1000;
   const cycleinterMs  = exerciseMs + breakMs;
