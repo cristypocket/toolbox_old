@@ -18,7 +18,7 @@ const TOOLS = [
     duration: "1-2 min",
     intervalTimer: { totalSec: 90, exerciseSec: 10, breakSec: 30 },   
     position: "planche",
-    intensity: "Très doux",
+    intensity: "très doux",
     modes: ["ok","fatigue_mentale"],
     summary: "Renforce ton corps.",
     steps: [
