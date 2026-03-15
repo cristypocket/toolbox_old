@@ -97,7 +97,7 @@ const TOOLS = [
     // --- Cartes Exercices - Contracté-Relaché --- //
    
    {
-    id: "contracte-relache",
+    id: "contracte-relache-stress",
     title: "Contracté–relâché pour le stress",
     category: "Exercices",
     tags: ["Contracté–relâché", "stress", "douleur", "relâchement"],
@@ -119,7 +119,7 @@ const TOOLS = [
 
    i18n: {
     en: {
-      title: "Contract-Relax",
+      title: "Contract-Relax for stress",
       category: "Exercises",
       position: "sitting/lying down",
       intensity: "very gentle",
