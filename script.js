@@ -1538,6 +1538,43 @@ function btUpdateSound(phase, progress){
   noiseGain.gain.setTargetAtTime(vol, audioCtx.currentTime, 0.15);
 }
 
+function playIntervalBell(type = "transition"){
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if(!Ctx) return;
+
+  const ctx = new Ctx();
+  const now = ctx.currentTime;
+
+  function bell(freq, delay){
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.value = freq;
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    gain.gain.setValueAtTime(0.0001, now + delay);
+    gain.gain.exponentialRampToValueAtTime(0.15, now + delay + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + delay + 0.6);
+
+    osc.start(now + delay);
+    osc.stop(now + delay + 0.6);
+  }
+
+  if(type === "done"){
+    // double petite clochette
+    bell(880, 0);
+    bell(1320, 0.15);
+  } else {
+    // petite clochette simple
+    bell(1040, 0);
+  }
+
+  setTimeout(() => ctx.close(), 800);
+}
+
 
 
 // -------------------------
@@ -1794,6 +1831,8 @@ function itStartRun(){
 
   itAnimStart = performance.now();
 
+  let lastPhase = null; 
+
   const step = (now) => {
     if(!itRunning) return;
 
@@ -1808,6 +1847,11 @@ function itStartRun(){
     if(itPhase){
       itPhase.textContent = (phase === "exercise") ? t("exercise") : t("break");
     }
+
+    if(lastPhase !== null && phase !== lastPhase){
+      playIntervalBell("transition");
+    }
+    lastPhase = phase; 
 
     const scale = (phase === "exercise")
       ? (BAR_MIN_SCALE + (BAR_MAX_SCALE - BAR_MIN_SCALE) * progress)
@@ -1831,6 +1875,7 @@ function itStartRun(){
     if(itLeft <= 0){
       itStopAll();
       if(itPhase) itPhase.textContent = t("done");
+      playIntervalBell("done"); 
     }
   }, 1000);
 }
