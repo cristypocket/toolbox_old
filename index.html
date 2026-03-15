@@ -239,6 +239,41 @@
     </div>
   </dialog>
 
+  
+  <!-- =========================== -->
+  <!-- CUSTOM INTERVAL TIMER MODAL -->
+  <!-- =========================== -->
+  
+  <dialog id="customIntervalSetup">
+  <div class="modal">
+    <div class="modal-top">
+      <h3>⏱️ Timer à libre</h3>
+      <button id="cisClose" class="close">✕</button>
+    </div>
+
+    <div class="form-stack">
+      <label>
+        Temps d'exercice (sec)
+        <input id="cisExercise" type="number" min="1" value="30">
+      </label>
+
+      <label>
+        Temps de pause (sec)
+        <input id="cisBreak" type="number" min="1" value="30">
+      </label>
+
+      <label>
+        Nombre de répétitions
+        <input id="cisRounds" type="number" min="1" value="3">
+      </label>
+    </div>
+
+    <div class="hero-actions" style="margin-top:16px;">
+      <button id="cisStart" class="btn primary" type="button">Lancer</button>
+    </div>
+  </div>
+</dialog>
+
   <script src="script.js" defer></script>
   <footer class="toolbox-footer">
   <p>© 2026 Cristina Perez. Tous droits réservés.</p>
