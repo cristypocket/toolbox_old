@@ -1015,7 +1015,7 @@ details.drop > ul button:active{
 .interval-bar{
   position: relative;
   width: 40px;
-  height: 320px;
+  height: 300px;
   border-radius: 8px;             
   margin: 18px auto 10px;
   border: 1px solid var(--line);
@@ -1027,13 +1027,13 @@ details.drop > ul button:active{
 
 .interval-bar-inner{
   width: 40px;
-  height: 5px;
+  height: 1px;
   border-radius: 8px;            
-  background: linear-gradient(to top at 30% 30%,
-    color-mix(in srgb, var(--terracotta) 30%, transparent),
-    color-mix(in srgb, var(--sage) 22%, transparent)
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--terracotta) 35%, transparent),
+    color-mix(in srgb, var(--sage) 30%, transparent)
   );
-  transform: scaleY(var(--bar-scale, 1));   /* <- scale piloté par JS */
+  transform: scaleY(var(--bar-scale, 0));   /* <- scale piloté par JS */
   transition: transform 250ms linear;
   filter: blur(0.2px);
 }
