@@ -1417,10 +1417,10 @@ function render(){
       const courbChip = (tool.modes && tool.modes.includes("courbatures")) ? `<span class="chip courbatures">😬</span>` : "";
       const doulChip = (tool.modes && tool.modes.includes("douleurs")) ? `<span class="chip douleurs">😣</span>` : "";
       
-      const tresdouxChip = (tool.intensity && tool.intensity.includes("très doux")) ? `<span class="chip tresdoux">🌱 Très doux</span>` : "";
-      const douxChip  = (tool.intensity && tool.intensity.includes("doux")) ? `<span class="chip doux">🌿 Doux</span>` : "";
-      const moyenChip = (tool.intensity && tool.intensity.includes("moyenne")) ? `<span class="chip moyen">🌤 Moyen</span>` : "";
-      const eleveChip = (tool.intensity && tool.intensity.includes("élevée")) ? `<span class="chip eleve">💪 Élevé</span>` : "";
+      const tresdouxChip = (tool.intensity && tool.intensity.matches("très doux")) ? `<span class="chip tresdoux">🐛 Très doux</span>` : "";
+      const douxChip  = (tool.intensity && tool.intensity.matches("doux")) ? `<span class="chip doux">🦋 Doux</span>` : "";
+      const moyenChip = (tool.intensity && tool.intensity.matches("moyen")) ? `<span class="chip moyen">✌️ Moyen</span>` : "";
+      const eleveChip = (tool.intensity && tool.intensity.matches("élevé")) ? `<span class="chip eleve">💪 Élevé</span>` : "";
       
       const card = document.createElement("article");
       card.className = "card";
@@ -1430,19 +1430,20 @@ function render(){
         <h3>${escapeHtml(toolText(tool,"title") || "")}</h3>
 
         <div class="meta">
-          <span class="chip">${escapeHtml(toolText(tool,"category") || "")}</span>
-          <span class="chip">${escapeHtml(tool.duration || "")}</span>
-          ${sosChip}
-          ${okChip}
-          ${physChip}
-          ${mentChip}
-          ${emoChip}
-          ${doulChip}
-          ${courbChip}
-          ${tresdouxChip}
-          ${douxChip}
-          ${moyenChip}
-          ${eleveChip}
+        <span class="chip">${escapeHtml(toolText(tool,"category") || "")}</span>
+        <span class="chip">${escapeHtml(tool.duration || "")}</span>
+        ${tresdouxChip}
+        ${douxChip}
+        ${moyenChip}
+        ${eleveChip}
+        ${okChip}
+        ${physChip}
+        ${mentChip}
+        ${emoChip}
+        ${doulChip}
+        ${courbChip}
+        ${sosChip}
+        
         </div>
 
         <p style="margin-top:10px;">${escapeHtml(toolText(tool,"summary") || "")}</p>
