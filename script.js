@@ -58,7 +58,7 @@ const TOOLS = [
     duration: "2-3 min",
     intervalTimer: { totalSec: 150, exerciseSec: 30, breakSec: 30 },   
     position: "planche",
-    intensity: "moyenne",
+    intensity: "moyen",
     modes: ["ok","fatigue_mentale"],
     summary: "Renforce ton corps.",
     steps: [
@@ -76,7 +76,7 @@ const TOOLS = [
          title: "Planck",
          category: "Exercise",
          position: "planck",
-         intensity: "medium",
+         intensity: "moderate",
          summary: "Strenghten your body.",
          steps: [
             "Position yourself in planck posture. Place your feet hip-width apart for better stability. Look at the floor and tuck your chin slightly to protect your neck.",
@@ -752,7 +752,7 @@ const TOOLS = [
     tags: ["Rouleau", "rouleau à picots", "fascia", "dos", "récup", "douleur"],
     duration: "5 min",
     position: "allongé",
-    intensity: "doux à modéré",
+    intensity: "moyen",
     modes: ["fatigue_phys","douleurs","sos"],
     summary: "Décompression + fascia : on dose pour éviter l’habituation (pas tous les jours).",
     steps: [
@@ -772,7 +772,7 @@ const TOOLS = [
          title: "Spiky roll - neck",
          category: "Pain",
          position: "lying down",
-         intensity: "gentle to moderate",
+         intensity: "moderate",
          summary: "Decompression + fascia: don't use every day to avoid habituation.",
          steps: [
            "Place the spiky roll under your neck, with your body flat on the floor and your arms at your sides.",
@@ -795,7 +795,7 @@ const TOOLS = [
     tags: ["Balle fascia", "Balle", "trapèze", "épaule", "fascia", "nuque"],
     duration: "2–6 min",
     position: "allongé",
-    intensity: "doux à modéré",
+    intensity: "moyen",
     modes: ["ok","fatigue_phys","douleurs","sos"],
     summary: "Déverrouillage doux : pression + mouvement du bras.",
     steps: [
@@ -814,7 +814,7 @@ const TOOLS = [
          title: "Fascia ball - trapezius",
          category: "Pain",
          position: "lying down",
-         intensity: "gentle to moderate",
+         intensity: "moderate",
          summary: "Soft unlocking: pressure + arm movement.",
          steps: [
            "Lie down on your back.",
