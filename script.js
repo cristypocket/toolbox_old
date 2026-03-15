@@ -1452,8 +1452,8 @@ let itAnimStart = 0;
 const ORB_MIN_SCALE = 1;
 const ORB_MAX_SCALE = 3.0;
 
-const BAR_MIN_SCALE = 1;
-const BAR_MAX_SCALE = 3.0; 
+const BAR_MIN_SCALE = 0;
+const BAR_MAX_SCALE = 1; 
 
 // -------------------------
 // Audio
