@@ -1417,10 +1417,10 @@ function render(){
       const courbChip = (tool.modes && tool.modes.includes("courbatures")) ? `<span class="chip courbatures">😬</span>` : "";
       const doulChip = (tool.modes && tool.modes.includes("douleurs")) ? `<span class="chip douleurs">😣</span>` : "";
       
-      const tresdouxChip = (tool.intensity && tool.intensity.matches("très doux")) ? `<span class="chip tresdoux">🐛 Très doux</span>` : "";
-      const douxChip  = (tool.intensity && tool.intensity.matches("doux")) ? `<span class="chip doux">🦋 Doux</span>` : "";
-      const moyenChip = (tool.intensity && tool.intensity.matches("moyen")) ? `<span class="chip moyen">✌️ Moyen</span>` : "";
-      const eleveChip = (tool.intensity && tool.intensity.matches("élevé")) ? `<span class="chip eleve">💪 Élevé</span>` : "";
+      const tresdouxChip = (tool.intensity && tool.intensity.includes("très doux")) ? `<span class="chip tresdoux">🐛 Très doux</span>` : "";
+      const douxChip  = (tool.intensity && tool.intensity.includes("doux")) ? `<span class="chip doux">🦋 Doux</span>` : "";
+      const moyenChip = (tool.intensity && tool.intensity.includes("moyen")) ? `<span class="chip moyen">✌️ Moyen</span>` : "";
+      const eleveChip = (tool.intensity && tool.intensity.includes("élevé")) ? `<span class="chip eleve">💪 Élevé</span>` : "";
       
       const card = document.createElement("article");
       card.className = "card";
