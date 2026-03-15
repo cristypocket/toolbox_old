@@ -1817,6 +1817,7 @@ function btStartRun(){
 // -------------------------
 
 function itStartRun(){
+  playIntervalBell("transition"); 
   itStopAll();
   itRunning = true;
 
@@ -1844,14 +1845,15 @@ function itStartRun(){
       ? (tCycle / exerciseMs)
       : ((tCycle - exerciseMs) / breakMs);
 
-    if(itPhase){
-      itPhase.textContent = (phase === "exercise") ? t("exercise") : t("break");
-    }
-
     if(lastPhase !== null && phase !== lastPhase){
       playIntervalBell("transition");
     }
     lastPhase = phase; 
+
+    if(itPhase){
+      itPhase.textContent = (phase === "exercise") ? t("exercise") : t("break");
+    }
+ 
 
     const scale = (phase === "exercise")
       ? (BAR_MIN_SCALE + (BAR_MAX_SCALE - BAR_MIN_SCALE) * progress)
