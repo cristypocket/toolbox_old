@@ -945,6 +945,14 @@ const itCount = document.getElementById("itCount");
 const breath2min = document.getElementById("breath2min");
 const randomTool = document.getElementById("randomTool");
 
+const customInterval = document.getElementById("customInterval");
+const customIntervalSetup = document.getElementById("customIntervalSetup");
+const cisClose = document.getElementById("cisClose");
+const cisStart = document.getElementById("cisStart");
+const cisExercise = document.getElementById("cisExercise");
+const cisBreak = document.getElementById("cisBreak");
+const cisRounds = document.getElementById("cisRounds");
+
 // -------------------------
 // Utils
 // -------------------------
@@ -1038,11 +1046,12 @@ const I18N = {
     "nav.filters.spikyRoller":"Rouleau à picots",
     "nav.filters.fasciaBall":"Balle fascia",
      
-    // hero FR
-    hero_title: "Ton sanctuaire de régulation",
-    hero_subtitle: "Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.",
-    breath2min: "🌬 Respiration 2 min",
-    random_tool: "🎲 Outil aléatoire",
+     // hero FR
+     hero_title: "Ton sanctuaire de régulation",
+     hero_subtitle: "Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.",
+     breath2min: "🌬 Respiration 2 min",
+     random_tool: "🎲 Outil aléatoire",
+     custom_interval: "⏱️ Timer libre",
      
     // modes FR
     "modes.title": "Mon état du moment...",
@@ -1125,11 +1134,12 @@ const I18N = {
     "nav.filters.spikyRoller":"Spiky roll",
     "nav.filters.fasciaBall":"Fascia ball", 
 
-    // hero EN
-    hero_title: "Your regulation sanctuary",
-    hero_subtitle: "Gentle tools to calm your nervous system, pain, and energy.",
-    breath2min: "🌬 Breathing 2 min",
-    random_tool: "🎲 Random tool",
+     // hero EN
+     hero_title: "Your regulation sanctuary",
+     hero_subtitle: "Gentle tools to calm your nervous system, pain, and energy.",
+     breath2min: "🌬 Breathing 2 min",
+     random_tool: "🎲 Random tool",
+     custom_interval: "⏱️ Custom timer",
 
     // modes EN
     "modes.title": "How do you feel right now…",
@@ -1201,20 +1211,21 @@ function applyLangToStaticHtml(){
 
   // 4) textes “connus” (ceux que tu as en dur dans HTML sans data-i18n partout)
   // -> on cible par ID, stable et sûr :
-  const brandStrong = document.querySelector(".brand-title strong");
-  if(brandStrong) brandStrong.textContent = t("brand_title");
+   const brandStrong = document.querySelector(".brand-title strong");
+   if(brandStrong) brandStrong.textContent = t("brand_title");
+   
+   const heroH1 = document.querySelector(".hero h1");
+   if(heroH1) heroH1.textContent = t("hero_title");
+   
+   const heroP = document.querySelector(".hero p");
+   if(heroP) heroP.textContent = t("hero_subtitle");
+   
+   if(breath2min) breath2min.textContent = t("breath2min");
+   if(randomTool) randomTool.textContent = t("random_tool");
+   if(customInterval) customInterval.textContent = t("custom_interval");
 
-  const heroH1 = document.querySelector(".hero h1");
-  if(heroH1) heroH1.textContent = t("hero_title");
-
-  const heroP = document.querySelector(".hero p");
-  if(heroP) heroP.textContent = t("hero_subtitle");
-
-  if(breath2min) breath2min.textContent = t("breath2min");
-  if(randomTool) randomTool.textContent = t("random_tool");
-
-  // search
-  if(searchInput) searchInput.setAttribute("placeholder", t("search_placeholder"));
+   // search
+   if(searchInput) searchInput.setAttribute("placeholder", t("search_placeholder"));
 }
 
 function setLang(next){
@@ -2167,7 +2178,36 @@ function setupEvents(){
   }
   if(itStart) itStart.addEventListener("click", itStartRun);
   if(itStop) itStop.addEventListener("click", itStopAll);
-  if(itReset) itReset.addEventListener("click", itResetAll); 
+  if(itReset) itReset.addEventListener("click", itResetAll);
+
+   // Custom Timer Controls
+   if(customInterval){
+      customInterval.addEventListener("click", () => {
+         safeShowModal(customIntervalSetup);
+      });
+   }
+   if(cisClose && customIntervalSetup){
+      cisClose.addEventListener("click", () => {
+         customIntervalSetup.close();
+      });
+   }
+   if(cisStart){
+      cisStart.addEventListener("click", () => {
+         const exerciseSec = Math.max(1, Number(cisExercise?.value || 30));
+         const breakSec = Math.max(1, Number(cisBreak?.value || 30));
+         const rounds = Math.max(1, Number(cisRounds?.value || 3));
+         
+         const totalSec = (exerciseSec + breakSec) * rounds;
+         
+         if(customIntervalSetup) customIntervalSetup.close();
+         
+         openIntervalTimer({
+            totalSec,
+            exerciseSec,
+            breakSec
+         });
+      });
+   }
 }
 
 // -------------------------
