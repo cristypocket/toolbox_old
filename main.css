@@ -1156,6 +1156,17 @@ dialog{
   align-items: center;
 }
 
+.modal ul,
+.tool-content ul {
+  margin: 8px 0 12px;
+  padding-left: 16px;
+}
+
+.modal li,
+.tool-content li {
+  margin: 0 0 6px;
+}
+
 .close{
   background: none;
   border: none;
