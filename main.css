@@ -522,6 +522,22 @@ details.drop > summary:focus-visible{
   margin: 0;
 }
 
+.tool-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.tool-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.tool-timer {
+  width: 260px;
+  flex-shrink: 0;
+}
+
 
 /* === MOBILE HEADER LAYOUT === */
 
