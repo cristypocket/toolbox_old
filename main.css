@@ -523,7 +523,6 @@ details.drop > summary:focus-visible{
 }
 
 .tool-layout {
-   width: 80%;
    display: flex;
    gap: 24px;
    align-items: flex-start;
@@ -1142,7 +1141,7 @@ dialog{
   border: none;
   border-radius: var(--radius-lg);
   padding: 0;
-  max-width: 500px;
+  max-width: 760px;
   width: 90%;
 }
 
