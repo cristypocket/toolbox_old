@@ -1534,12 +1534,13 @@ function openTool(id){
     <div class="tool-layout">
 
       <div class="tool-content">
-        <h4>${escapeHtml(t("steps"))}</h4>
-        <ul>${steps}</ul>
-
-        <p><strong>${escapeHtml(t("low"))}</strong> ${escapeHtml(toolText(tool,"low") || "—")}</p>
-        <p><strong>${escapeHtml(t("stop"))}</strong> ${escapeHtml(toolText(tool,"stop") || "—")}</p>
-        <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(toolText(tool,"note") || "—")}</p>
+      ${mediaHtml}
+      <h4>${escapeHtml(t("steps"))}</h4>
+      <ul>${steps}</ul>
+      
+      <p><strong>${escapeHtml(t("low"))}</strong> ${escapeHtml(toolText(tool,"low") || "—")}</p>
+      <p><strong>${escapeHtml(t("stop"))}</strong> ${escapeHtml(toolText(tool,"stop") || "—")}</p>
+      <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(toolText(tool,"note") || "—")}</p>
       </div>
 
       <div id="toolTimerMount" class="tool-timer"></div>
