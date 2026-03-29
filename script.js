@@ -11,25 +11,30 @@ const TOOLS = [
       // --- Cartes Exercices - Renforcement --- //
 
     {
-    id: "planche-10",
-    title: "Planche 3x 10 sec",
-    category: "Exercices",
-    tags: ["renforcement", "muscle", "abdos"],
-    duration: "1-2 min",
-    intervalTimer: { totalSec: 90, exerciseSec: 10, breakSec: 30 },   
-    position: "planche",
-    intensity: "très doux",
-    modes: ["ok","fatigue_mentale"],
-    summary: "Renforce ton corps.",
-    steps: [
-      "Positionne toi en planche, sur les mains.",
-      "Si tu préfères te positionner sur les coudes, fais bien attention à abaisser tes omoplates.", 
-      "Ecarte les pieds à largeur de hanches pour une meilleure stabilité.",
-      "Regarde le sol et rentre le menton légèrement pour protéger ta nuque.",
-      "Tiens 10 secondes.",
-      "Pendant la pause, mets-toi en posture du chiot. Les genoux au sol, en repos sur tes talons, les bras allongés devant et le front au sol.",
-      "Fais 3 répétitions."
-    ],
+       id: "planche-10",
+       title: "Planche 3x 10 sec",
+       category: "Exercices",
+       tags: ["renforcement", "muscle", "abdos"],
+       duration: "1-2 min",
+       media: {
+          type: "gif",
+          src: "images/exercices/planche-10.gif",
+          alt: "Démonstration de la planche 10 secondes"
+       },
+       intervalTimer: { totalSec: 90, exerciseSec: 10, breakSec: 30 },   
+       position: "planche",
+       intensity: "très doux",
+       modes: ["ok","fatigue_mentale"],
+       summary: "Renforce ton corps.",
+       steps: [
+          "Positionne toi en planche, sur les mains.",
+          "Si tu préfères te positionner sur les coudes, fais bien attention à abaisser tes omoplates.", 
+          "Ecarte les pieds à largeur de hanches pour une meilleure stabilité.",
+          "Regarde le sol et rentre le menton légèrement pour protéger ta nuque.",
+          "Tiens 10 secondes.",
+          "Pendant la pause, mets-toi en posture du chiot. Les genoux au sol, en repos sur tes talons, les bras allongés devant et le front au sol.",
+          "Fais 3 répétitions."
+       ],
        low: "Version low battery: fais juste 2 répétitions.",
        stop: "Stop si douleurs ou fourmillements.",
        note: "Plus tu pratiques, plus tu renforces ton corps et plus c'est facile.",
@@ -1542,6 +1547,14 @@ function openTool(id){
     </div>
   `;
 }
+   const mediaHtml = tool.media?.src
+  ? `
+    <div class="tool-media">
+      <img src="${escapeHtml(tool.media.src)}" alt="${escapeHtml(tool.media.alt || toolText(tool,"title") || "")}">
+    </div>
+  `
+  : "";
+   
    const timerMount = document.getElementById("toolTimerMount");
    
    if(timerMount){
