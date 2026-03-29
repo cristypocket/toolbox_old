@@ -1141,8 +1141,8 @@ dialog{
   border: none;
   border-radius: var(--radius-lg);
   padding: 0;
-  max-width: 760px;
-  width: 100%;
+  max-width: 740px;
+  width: 90%;
 }
 
 .modal{
