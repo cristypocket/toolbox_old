@@ -577,7 +577,16 @@ details.drop > summary:focus-visible{
 
   .brand.brand-centered{
   min-width: 0;
-  } 
+  }
+
+   .tool-layout {
+    flex-direction: column;
+  }
+
+  .tool-timer {
+    width: 100%;
+  }
+   
 }
 
 /*@media (max-width: 760px){
