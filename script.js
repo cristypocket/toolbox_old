@@ -921,26 +921,24 @@ const modalBody = document.getElementById("modalBody");
 const closeModal = document.getElementById("closeModal");
 
 const breathTimer = document.getElementById("breathTimer");
-const btClose = document.getElementById("btClose");
-const btStart = document.getElementById("btStart");
-const btStop = document.getElementById("btStop");
-const btReset = document.getElementById("btReset");
-const btPhase = document.getElementById("btPhase");
-const btRemaining = document.getElementById("btRemaining");
-const breathOrb = breathTimer ? breathTimer.querySelector(".breath-orb") : null;
-const breathOrbInner = breathTimer ? breathTimer.querySelector(".breath-orb-inner") : null;
-const btCount = document.getElementById("btCount");
+let btStart = null;
+let btStop = null;
+let btReset = null;
+let btPhase = null;
+let btRemaining = null;
+let breathOrb = null;
+let breathOrbInner = null;
+let btCount = null;
 
 const intervalTimer = document.getElementById("intervalTimer");
-const itClose = document.getElementById("itClose");
-const itStart = document.getElementById("itStart");
-const itStop = document.getElementById("itStop");
-const itReset = document.getElementById("itReset");
-const itPhase = document.getElementById("itPhase");
-const itRemaining = document.getElementById("itRemaining");
-const intervalBar = intervalTimer ? intervalTimer.querySelector(".interval-bar") : null;
-const intervalBarInner = intervalTimer ? intervalTimer.querySelector(".interval-bar-inner") : null;
-const itCount = document.getElementById("itCount");
+let itStart = null;
+let itStop = null;
+let itReset = null;
+let itPhase = null;
+let itRemaining = null;
+let intervalBar = null;
+let intervalBarInner = null;
+let itCount = null;
 
 const breath2min = document.getElementById("breath2min");
 const randomTool = document.getElementById("randomTool");
@@ -1509,18 +1507,20 @@ function render(){
 // Tool modal
 // -------------------------
 function openTool(id){
-  const tool = TOOLS.find(t => t.id === id);
-  if(!tool) return;
-
-  if(modalTitle) modalTitle.textContent = toolText(tool,"title") || "";
-
-  if(modalMeta){
-    modalMeta.innerHTML = `
+   btStopAll();
+   itStopAll();
+   const tool = TOOLS.find(t => t.id === id);
+   if(!tool) return;
+   
+   if(modalTitle) modalTitle.textContent = toolText(tool,"title") || "";
+   
+   if(modalMeta){
+      modalMeta.innerHTML = `
       <span class="chip">${escapeHtml(toolText(tool,"category") || "")}</span>
       <span class="chip">${escapeHtml(tool.duration || "")}</span>
       <span class="chip">${escapeHtml(toolText(tool,"position") || "")}</span>
     `;
-  }
+   }
 
   const steps = toolArray(tool,"steps").map(s => `<li>${escapeHtml(s)}</li>`).join("");
 
@@ -1532,32 +1532,28 @@ function openTool(id){
       <p><strong>${escapeHtml(t("low"))}</strong> ${escapeHtml(toolText(tool,"low") || "—")}</p>
       <p><strong>${escapeHtml(t("stop"))}</strong> ${escapeHtml(toolText(tool,"stop") || "—")}</p>
       <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(toolText(tool,"note") || "—")}</p>
+
+      <div id="toolTimerMount" style="margin-top:16px;"></div>
     `;
 
-  if(tool.timer || tool.intervalTimer){
-    modalBody.innerHTML += `
-       <div style="margin-top:16px;">
-         <button class="btn" id="startToolTimer" type="button">
-           ${escapeHtml(t("start_timer"))}
-         </button>
-       </div>
-     `;
-
-     setTimeout(() => {
-       const btn = document.getElementById("startToolTimer");
-       if(!btn) return;
-
-       btn.addEventListener("click", () => {
-         if(tool.intervalTimer){
-           openIntervalTimer(tool.intervalTimer);
-         } else if(tool.timer){
-           openBreathTimer({ ...tool.timer, sound: true });
-           }
-       });
-      }, 0);
-   }
   }
 
+   const timerMount = document.getElementById("toolTimerMount");
+   
+   if(timerMount){
+      if(tool.timer){
+         timerMount.innerHTML = renderBreathTimerBlock();
+         bindBreathTimerDom();
+         openBreathTimer({ ...tool.timer, sound: true, inline: true });
+      } else if(tool.intervalTimer){
+         timerMount.innerHTML = renderIntervalTimerBlock();
+         bindIntervalTimerDom();
+         openIntervalTimer(tool.intervalTimer);
+      } else {
+         timerMount.innerHTML = "";
+      }
+   }
+   
   safeShowModal(toolModal);
 }
 
@@ -2026,6 +2022,88 @@ function itStartRun(){
   }, 1000);
 }
 
+// -------------------------
+// Timers dans fiches
+// -------------------------
+
+function renderBreathTimerBlock(){
+  return `
+    <div class="tool-timer-block">
+      <h4>${escapeHtml(t("breath.timer.title"))}</h4>
+
+      <div class="breath-orb">
+        <div class="breath-orb-inner"></div>
+        <div class="breath-count" id="btCount"></div>
+      </div>
+
+      <div id="btPhase" class="center-text">${escapeHtml(t("ready"))}</div>
+      <div id="btRemaining" class="center-text">2:00</div>
+
+      <div class="hero-actions">
+        <button id="btStart" class="btn primary" type="button">${escapeHtml(t("timer.start"))}</button>
+        <button id="btStop" class="btn" type="button">${escapeHtml(t("timer.stop"))}</button>
+        <button id="btReset" class="btn ghost" type="button">${escapeHtml(t("timer.reset"))}</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderIntervalTimerBlock(){
+  return `
+    <div class="tool-timer-block">
+      <h4>${escapeHtml(t("interval.timer.title"))}</h4>
+
+      <div class="interval-bar">
+        <div class="interval-bar-inner"></div>
+        <div class="interval-count" id="itCount"></div>
+      </div>
+
+      <div id="itPhase" class="center-text">${escapeHtml(t("ready"))}</div>
+      <div id="itRemaining" class="center-text">2:00</div>
+
+      <div class="hero-actions">
+        <button id="itStart" class="btn primary" type="button">${escapeHtml(t("timer.start"))}</button>
+        <button id="itStop" class="btn" type="button">${escapeHtml(t("timer.stop"))}</button>
+        <button id="itReset" class="btn ghost" type="button">${escapeHtml(t("timer.reset"))}</button>
+      </div>
+    </div>
+  `;
+}
+
+function bindBreathTimerDom(){
+  btStart = document.getElementById("btStart");
+  btStop = document.getElementById("btStop");
+  btReset = document.getElementById("btReset");
+  btPhase = document.getElementById("btPhase");
+  btRemaining = document.getElementById("btRemaining");
+  btCount = document.getElementById("btCount");
+
+  const breathRoot = document.querySelector(".tool-timer-block .breath-orb");
+  breathOrb = breathRoot;
+  breathOrbInner = breathRoot ? breathRoot.querySelector(".breath-orb-inner") : null;
+
+  if(btStart) btStart.addEventListener("click", btStartRun);
+  if(btStop) btStop.addEventListener("click", btStopAll);
+  if(btReset) btReset.addEventListener("click", btResetAll);
+}
+
+function bindIntervalTimerDom(){
+  itStart = document.getElementById("itStart");
+  itStop = document.getElementById("itStop");
+  itReset = document.getElementById("itReset");
+  itPhase = document.getElementById("itPhase");
+  itRemaining = document.getElementById("itRemaining");
+  itCount = document.getElementById("itCount");
+
+  const intervalRoot = document.querySelector(".tool-timer-block .interval-bar");
+  intervalBar = intervalRoot;
+  intervalBarInner = intervalRoot ? intervalRoot.querySelector(".interval-bar-inner") : null;
+
+  if(itStart) itStart.addEventListener("click", itStartRun);
+  if(itStop) itStop.addEventListener("click", itStopAll);
+  if(itReset) itReset.addEventListener("click", itResetAll);
+}
+
 
 // -------------------------
 // Events
@@ -2182,9 +2260,6 @@ function setupEvents(){
       breathTimer.close();
     });
   }
-  if(btStart) btStart.addEventListener("click", btStartRun);
-  if(btStop) btStop.addEventListener("click", btStopAll);
-  if(btReset) btReset.addEventListener("click", btResetAll);
 
   // Interval timer controls
   if(itClose && intervalTimer){
@@ -2193,9 +2268,6 @@ function setupEvents(){
       intervalTimer.close();
     });
   }
-  if(itStart) itStart.addEventListener("click", itStartRun);
-  if(itStop) itStop.addEventListener("click", itStopAll);
-  if(itReset) itReset.addEventListener("click", itResetAll);
 
    // Custom Timer Controls
    if(customInterval){
