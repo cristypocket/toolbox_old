@@ -523,9 +523,10 @@ details.drop > summary:focus-visible{
 }
 
 .tool-layout {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
+   width: 80%;
+   display: flex;
+   gap: 24px;
+   align-items: flex-start;
 }
 
 .tool-content {
