@@ -1552,7 +1552,7 @@ function openTool(id){
       } else if(tool.intervalTimer){
          timerMount.innerHTML = renderIntervalTimerBlock();
          bindIntervalTimerDom();
-         openIntervalTimer(tool.intervalTimer);
+         openIntervalTimer({ ...tool.intervalTimer, inline: true });
       } else {
          timerMount.innerHTML = "";
       }
@@ -1862,6 +1862,29 @@ function openBreathTimer(options = {}){
     safeShowModal(breathTimer);
   }
 }
+function openBreathTimer(options = {}){
+  const total = Number(options.totalSec);
+  const inh = Number(options.inhaleSec);
+  const exh = Number(options.exhaleSec);
+
+  btConfig = {
+    totalSec: Number.isFinite(total) && total > 0 ? total : 120,
+    inhaleSec: Number.isFinite(inh) && inh > 0 ? inh : 4,
+    exhaleSec: Number.isFinite(exh) && exh > 0 ? exh : 6,
+    sound: typeof options.sound === "boolean" ? options.sound : false
+  };
+
+  btLeft = btConfig.totalSec;
+  btUpdateUI();
+
+  if(btPhase) btPhase.textContent = "Ready?";
+  if(btCount) btCount.textContent = "";
+  if(breathOrb) breathOrb.style.setProperty("--orb-scale", String(ORB_MIN_SCALE));
+
+  if(!options.inline && breathTimer){
+    safeShowModal(breathTimer);
+  }
+}
 
 // -------------------------
 // Open interval timer
@@ -1885,9 +1908,7 @@ function openIntervalTimer(options = {}){
   if(itCount) itCount.textContent = "";
   if(intervalBar) intervalBar.style.setProperty("--bar-scale", String(BAR_MIN_SCALE));
 
-  // IMPORTANT : pas de son ici
-
-  if(intervalTimer){
+  if(!options.inline && intervalTimer){
     safeShowModal(intervalTimer);
   }
 }
