@@ -580,7 +580,8 @@ details.drop > summary:focus-visible{
   }
 
    .tool-layout {
-    flex-direction: column;
+      flex-direction: column;
+      gap: 10px;
   }
 
   .tool-timer {
