@@ -39,8 +39,8 @@ const TOOLS = [
          title: "Planck 3x 10sec",
          category: "Exercise",
          position: "planck",
-         intensity: "Very soft",
-         summary: "Strenghten your body.",
+         intensity: "Very gentle",
+         summary: "Strengthen your body.",
          steps: [
             "Position yourself in planck posture, on your hands.",
             "If you prefer to stand on your elbows, make sure to lower your shoulder plates.",
@@ -80,7 +80,7 @@ const TOOLS = [
          category: "Exercise",
          position: "planck",
          intensity: "moderate",
-         summary: "Strenghten your body.",
+         summary: "Strengthen your body.",
          steps: [
             "Position yourself in planck posture. Place your feet hip-width apart for better stability. Look at the floor and tuck your chin slightly to protect your neck.",
             "Hold for 30 seconds.",
@@ -885,7 +885,7 @@ const TOOLS = [
 
 const state = {
    mode: "",
-   intensityfilter: "",
+   intensityFilter: "",
    query: "",
    filter: "",
    showFavs: false,
@@ -1062,6 +1062,14 @@ const I18N = {
     "modes.aches": "😬 Courbatures",
     "modes.pain": "😣 Douleurs",
     "modes.sos": "🔥 SOS", 
+
+     // intensity FR
+     "intensity.title": "Intensité souhaitée",
+     "intensity.all": "Toutes",
+     "intensity.verygentle": "🐛 Très doux",
+     "intensity.gentle": "🦋 Doux",
+     "intensity.moderate": "✌️ Moyenne",
+     "intensity.high": "💪 Élevée",
      
     // library FR
     "library.activeFilter": "Filtre actif :",
@@ -1150,6 +1158,14 @@ const I18N = {
     "modes.aches": "😬 Muscle aches",
     "modes.pain": "😣 Pain",
     "modes.sos": "🔥 SOS", 
+
+      // intensity EN
+     "intensity.title": "Intensity",
+     "intensity.all": "All",
+     "intensity.verygentle": "🐛 Very gentle",
+     "intensity.gentle": "🦋 Gentle",
+     "intensity.moderate": "✌️ Moderate",
+     "intensity.high": "💪 High",
    
     // library EN
     "library.activeFilter": "Active filter:",
@@ -1431,10 +1447,11 @@ function render(){
       const courbChip = (tool.modes && tool.modes.includes("courbatures")) ? `<span class="chip courbatures">😬</span>` : "";
       const doulChip = (tool.modes && tool.modes.includes("douleurs")) ? `<span class="chip douleurs">😣</span>` : "";
       
-      const tresdouxChip = (tool.intensity === "très doux") ? `<span class="chip tresdoux">🐛 Très doux</span>` : "";
-      const douxChip  = (tool.intensity === "doux") ? `<span class="chip doux">🦋 Doux</span>` : "";
-      const moyenChip = (tool.intensity === "moyen") ? `<span class="chip moyen">✌️ Moyen</span>` : "";
-      const eleveChip = (tool.intensity === "élevé") ? `<span class="chip eleve">💪 Élevé</span>` : "";
+      const intensity = normalize(toolText(tool, "intensity") || "");
+      const tresdouxChip = (intensity === "tres doux" || intensity === "very gentle") ? `<span class="chip tresdoux">${escapeHtml(t("intensity.verygentle"))}</span>` : "";
+      const douxChip = (intensity === "doux" || intensity === "gentle") ? `<span class="chip doux">${escapeHtml(t("intensity.gentle"))}</span>` : "";
+      const moyenChip = (intensity === "moyen" || intensity === "moderate") ? `<span class="chip moyen">${escapeHtml(t("intensity.moderate"))}</span>` : "";
+      const eleveChip = (intensity === "eleve" || intensity === "high") ? `<span class="chip eleve">${escapeHtml(t("intensity.high"))}</span>` : "";
       
       const card = document.createElement("article");
       card.className = "card";
