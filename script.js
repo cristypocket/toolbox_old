@@ -1525,19 +1525,23 @@ function openTool(id){
   const steps = toolArray(tool,"steps").map(s => `<li>${escapeHtml(s)}</li>`).join("");
 
   if(modalBody){
-    modalBody.innerHTML = `
-      <h4>${escapeHtml(t("steps"))}</h4>
-      <ul>${steps}</ul>
+  modalBody.innerHTML = `
+    <div class="tool-layout">
 
-      <p><strong>${escapeHtml(t("low"))}</strong> ${escapeHtml(toolText(tool,"low") || "—")}</p>
-      <p><strong>${escapeHtml(t("stop"))}</strong> ${escapeHtml(toolText(tool,"stop") || "—")}</p>
-      <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(toolText(tool,"note") || "—")}</p>
+      <div class="tool-content">
+        <h4>${escapeHtml(t("steps"))}</h4>
+        <ul>${steps}</ul>
 
-      <div id="toolTimerMount" style="margin-top:16px;"></div>
-    `;
+        <p><strong>${escapeHtml(t("low"))}</strong> ${escapeHtml(toolText(tool,"low") || "—")}</p>
+        <p><strong>${escapeHtml(t("stop"))}</strong> ${escapeHtml(toolText(tool,"stop") || "—")}</p>
+        <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(toolText(tool,"note") || "—")}</p>
+      </div>
 
-  }
+      <div id="toolTimerMount" class="tool-timer"></div>
 
+    </div>
+  `;
+}
    const timerMount = document.getElementById("toolTimerMount");
    
    if(timerMount){
