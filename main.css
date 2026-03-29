@@ -538,6 +538,18 @@ details.drop > summary:focus-visible{
   flex-shrink: 0;
 }
 
+.tool-media {
+  margin: 0 0 16px;
+}
+
+.tool-media img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
 
 /* === MOBILE HEADER LAYOUT === */
 
