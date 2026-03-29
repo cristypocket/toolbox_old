@@ -1082,12 +1082,12 @@ const I18N = {
     fav: "Favori",
 
     // modal FR
-    steps: "Étapes",
+    steps: "📋 Étapes",
     low: "🌥 Low battery :",
     stop: "🔥 Stop si :",
     note: "✨ Note :",
     start_timer: "⏱ Lancer le timer",
-    "breath.timer.title": "🌬 Timer respiration",
+    "breath.timer.title": "🌀 Timer respiration",
     "interval.timer.title": "⏱️ Timer à intervale", 
 
     // timer FR
@@ -1178,12 +1178,12 @@ const I18N = {
     fav: "Favorite",
 
     // modal EN
-    steps: "Steps",
+    steps: "📋 Steps",
     low: "🌥 Low battery:",
     stop: "🔥 Stop if:",
     note: "✨ Note:",
     start_timer: "⏱ Start timer",
-    "breath.timer.title": "🌬 Breathing timer",
+    "breath.timer.title": "🌀 Breathing timer",
     "interval.timer.title": "⏱️ Interval timer", 
 
     // timer EN
