@@ -1553,13 +1553,7 @@ function openTool(id){
     </div>
   `;
 }
-   const mediaHtml = tool.media?.src
-  ? `
-    <div class="tool-media">
-      <img src="${escapeHtml(tool.media.src)}" alt="${escapeHtml(tool.media.alt || toolText(tool,"title") || "")}">
-    </div>
-  `
-  : "";
+   
    
    const timerMount = document.getElementById("toolTimerMount");
    
@@ -1576,7 +1570,13 @@ function openTool(id){
          timerMount.innerHTML = "";
       }
    }
-   
+  const mediaHtml = tool.media?.src
+  ? `
+    <div class="tool-media">
+      <img src="${escapeHtml(tool.media.src)}" alt="${escapeHtml(tool.media.alt || toolText(tool,"title") || "")}">
+    </div>
+  `
+  : ""; 
   safeShowModal(toolModal);
 }
 
