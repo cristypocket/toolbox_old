@@ -522,70 +522,6 @@ details.drop > summary:focus-visible{
   margin: 0;
 }
 
-.tool-layout {
-   display: grid;
-   grid-template-columns: minmax(0, 1.6fr) minmax(280px, 360px);
-   gap: 28px;
-   align-items: start;
-}
-
-.tool-content{
-  min-width: 0;
-}
-
-.tool-content ul{
-  margin: 10px 0 0;
-  padding-left: 20px;
-}
-
-.tool-content li{
-  margin-bottom: 8px;
-}
-
-.tool-timer{
-  min-width: 0;
-}
-
-.tool-side{
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: center;
-}
-
-.tool-media{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.tool-media img{
-  display: block;
-  width: 100%;
-  max-width: 150px;
-  height: auto;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-}
-
-.tool-timer-block{
-  width: 100%;
-}
-
-.tool-timer-block h4,
-.tool-content h4{
-  margin-top: 0;
-}
-
-#toolModal .modal{
-  max-width: 980px;
-  width: min(980px, 92vw);
-}
-
-#toolModal{
-  max-width: 980px;
-  width: min(980px, 92vw);
-}
 
 
 /* === MOBILE HEADER LAYOUT === */
@@ -1198,7 +1134,7 @@ dialog{
   border: none;
   border-radius: var(--radius-lg);
   padding: 20px;
-  max-width: 780px;
+  max-width: 960px;
   width: 100%;
 }
 
@@ -1229,4 +1165,70 @@ dialog{
   font-size: 18px;
   cursor: pointer;
 }
+
+.tool-layout {
+   display: grid;
+   grid-template-columns: minmax(0, 1.6fr) minmax(280px, 360px);
+   gap: 28px;
+   align-items: start;
+}
+
+.tool-content{
+  min-width: 0;
+}
+
+.tool-content ul{
+  margin: 10px 0 0;
+  padding-left: 20px;
+}
+
+.tool-content li{
+  margin-bottom: 8px;
+}
+
+.tool-timer{
+  min-width: 0;
+}
+
+.tool-side{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+.tool-media{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.tool-media img{
+  display: block;
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
+.tool-timer-block{
+  width: 100%;
+}
+
+.tool-timer-block h4,
+.tool-content h4{
+  margin-top: 0;
+}
+
+#toolModal .modal{
+  max-width: 980px;
+  width: min(980px, 92vw);
+}
+
+#toolModal{
+  max-width: 980px;
+  width: min(980px, 92vw);
+}
+
 
