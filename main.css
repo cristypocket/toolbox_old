@@ -1089,7 +1089,7 @@ dialog{
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0px;
   margin-bottom: 5px;
 }
 
