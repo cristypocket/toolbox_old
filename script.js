@@ -17,8 +17,8 @@ const TOOLS = [
        tags: ["renforcement", "muscle", "abdos"],
        duration: "1-2 min",
        media: {
-          type: "gif",
-          src: "images/exercices/planche-10.gif",
+          type: "png",
+          src: "images/planche.png",
           alt: "Démonstration de la planche 10 secondes"
        },
        intervalTimer: { totalSec: 90, exerciseSec: 10, breakSec: 30 },   
@@ -64,6 +64,11 @@ const TOOLS = [
     category: "Exercices",
     tags: ["renforcement", "muscle", "abdos"],
     duration: "2-3 min",
+    media: {
+          type: "png",
+          src: "images/planche.png",
+          alt: "Démonstration de la planche 10 secondes"
+       },  
     intervalTimer: { totalSec: 150, exerciseSec: 30, breakSec: 30 },   
     position: "planche",
     intensity: "moyen",
