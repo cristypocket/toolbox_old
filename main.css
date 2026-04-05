@@ -1079,7 +1079,7 @@ dialog{
 
 #toolModal .modal{
   width: 100%;
-  padding: 15px 32px;
+  padding: 10px 32px;
   max-height: 92vh;
   overflow-y: auto;
   overflow-x: auto;
@@ -1090,11 +1090,16 @@ dialog{
   justify-content: space-between;
   align-items: flex-start;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+#modalTitle{
+  margin: 0;
+  line-height: 1.2;
 }
 
 #modalMeta{
-  margin-bottom: 18px;
+  margin: 6px 0 14px; 
 }
 
 .tool-layout{
