@@ -1079,18 +1079,18 @@ dialog{
 
 #toolModal .modal{
   width: 100%;
-  padding: 18px 32px;
+  padding: 15px 32px;
   max-height: 92vh;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 .modal-top{
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 #modalMeta{
