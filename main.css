@@ -1167,7 +1167,7 @@ dialog{
 
 .tool-layout {
    display: grid;
-   grid-template-columns: minmax(0, 1.6fr) minmax(280px, 360px);
+   grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
    gap: 28px;
    align-items: start;
 }
