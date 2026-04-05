@@ -1542,25 +1542,24 @@ function openTool(id){
 
   if(modalBody){
   modalBody.innerHTML = `
-    <div class="tool-layout">
+  <div class="tool-layout">
 
-      <div class="tool-content">
+    <div class="tool-content">
       <h4>${escapeHtml(t("steps"))}</h4>
       <ul>${steps}</ul>
-      
+
       <p><strong>${escapeHtml(t("low"))}</strong> ${escapeHtml(toolText(tool,"low") || "—")}</p>
       <p><strong>${escapeHtml(t("stop"))}</strong> ${escapeHtml(toolText(tool,"stop") || "—")}</p>
       <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(toolText(tool,"note") || "—")}</p>
-      </div>
-
-      <div id="toolTimerMount" class="tool-timer"></div>
-
-      <div class=tool-media">
-      ${mediaHtml}
-      </div>
-
     </div>
-  `;
+
+    <div class="tool-side">
+      <div id="toolTimerMount" class="tool-timer"></div>
+      ${mediaHtml}
+    </div>
+
+  </div>
+`;
 }
    
    
