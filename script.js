@@ -17,7 +17,7 @@ const TOOLS = [
        tags: ["renforcement", "muscle", "abdos"],
        duration: "1-2 min",
        media: {
-          src: "images/Planche.png",
+          src: "images/planche.png",
           alt: "Démonstration de la planche 10 secondes"
        },
        intervalTimer: { totalSec: 90, exerciseSec: 10, breakSec: 30 },   
