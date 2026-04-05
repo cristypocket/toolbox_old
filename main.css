@@ -1071,11 +1071,16 @@ dialog{
 
 #toolModal{
   width: min(1180px, 94vw);
+  max-height: 92vh;
+  padding: 0;
 }
 
 #toolModal .modal{
   width: 100%;
   padding: 28px 32px;
+  max-height: 92vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .modal-top{
@@ -1083,11 +1088,11 @@ dialog{
   justify-content: space-between;
   align-items: flex-start;
   gap: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 #modalMeta{
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .tool-layout{
@@ -1118,6 +1123,12 @@ dialog{
 .tool-content p{
   margin: 0 0 14px;
   line-height: 1.45;
+}
+
+.tool-content p:last-child,
+.tool-content ul:last-child,
+.tool-layout > *:last-child{
+  margin-bottom: 0;
 }
 
 .tool-media-col{
