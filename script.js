@@ -17,7 +17,6 @@ const TOOLS = [
        tags: ["renforcement", "muscle", "abdos"],
        duration: "1-2 min",
        media: {
-          type: "png",
           src: "images/planche.png",
           alt: "Démonstration de la planche 10 secondes"
        },
@@ -65,7 +64,6 @@ const TOOLS = [
     tags: ["renforcement", "muscle", "abdos"],
     duration: "2-3 min",
     media: {
-          type: "png",
           src: "images/planche.png",
           alt: "Démonstration de la planche 10 secondes"
        },  
