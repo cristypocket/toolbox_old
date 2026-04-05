@@ -1074,7 +1074,7 @@ dialog{
 #toolModal{
   width: min(1180px, 94vw);
   max-height: 92vh;
-  padding: 0;
+  padding: 3px;
 }
 
 #toolModal .modal{
