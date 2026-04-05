@@ -1067,6 +1067,8 @@ dialog{
   padding: 0;
   width: auto;
   max-width: none;
+  height: auto;
+  max-height: none; 
 }
 
 #toolModal{
@@ -1077,7 +1079,7 @@ dialog{
 
 #toolModal .modal{
   width: 100%;
-  padding: 28px 32px;
+  padding: 18px 32px;
   max-height: 92vh;
   overflow-y: auto;
   overflow-x: hidden;
