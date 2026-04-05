@@ -1553,9 +1553,12 @@ function openTool(id){
       <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(toolText(tool,"note") || "—")}</p>
     </div>
 
-    <div class="tool-side">
-      <div id="toolTimerMount" class="tool-timer"></div>
+    <div class="tool-media-col">
       ${mediaHtml}
+    </div>
+
+    <div class="tool-timer-col">
+      <div id="toolTimerMount" class="tool-timer"></div>
     </div>
 
   </div>
