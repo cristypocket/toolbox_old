@@ -656,7 +656,6 @@ details.drop > summary:focus-visible{
   justify-content: flex-end;     
 }
 
-/* Search à droite */
 .nav-right .search{
   width: 345px;
   max-width: 36vw;
@@ -666,74 +665,6 @@ details.drop > summary:focus-visible{
 .nav-right .search input{
   width: 100%;
   height: 100%; 
-}
-
-/* Si l'écran devient trop petit => on autorise le wrap proprement */
-@media (max-width: 980px){
-  .nav-inner{
-    flex-wrap: wrap;
-  }
-  .nav-left{
-    flex-wrap: wrap;
-  }
-  .nav-right{
-    width: 100%;
-    align-items: stretch;     
-  }
-
-  .nav-actions{
-    justify-content: flex-end;
-    flex-wrap: wrap;          
-  }
-
-  .nav-right .search{
-    width: 100%;
-    max-width: 520px;
-    min-width: 0;
-  }
-}
-
-@media (max-width: 640px){
-  .nav-inner{
-    flex-wrap: wrap;
-    gap: 10px; 
-  }
-  .nav-left{
-  display: flex;  
-  justify-content: center;
-  gap: 5px;
-  flex-wrap: wrap;
-  min-width: 0;
-  }
-
-.nav-right{
-  display: flex;
-  flex-direction: column; 
-  align-items: center;
-  gap: 10px;
-  min-width: 0px;             
-  }
-
-  .nav-actions{
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 5px; 
-  }
-
-  .nav-right .search{
-    width: 98%;
-    max-width: 540px;
-    min-width: 0;
-  }
-  .nav-right .search input,
-  input[type="search"],
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  textarea,
-  select{
-    font-size: 16px !important;
-  } 
 }
 
 details.drop{
@@ -1134,69 +1065,65 @@ dialog{
   border: none;
   border-radius: var(--radius-lg);
   padding: 0;
-  
-  width: auto;        /* 🔥 au lieu de 100% */
-  max-width: none;    /* 🔥 important */
+  width: auto;
+  max-width: none;
 }
 
-.modal{
-  padding: 0px;
+#toolModal{
+  width: min(1180px, 94vw);
+}
+
+#toolModal .modal{
+  width: 100%;
+  padding: 28px 32px;
 }
 
 .modal-top{
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 10px;
 }
 
-.modal ul,
-.tool-content ul {
-  margin: 8px 0 12px;
-  padding-left: 16px;
+#modalMeta{
+  margin-bottom: 20px;
 }
 
-.modal li,
-.tool-content li {
-  margin: 0 0 6px;
-}
-
-.close{
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.tool-layout {
+.tool-layout{
   display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 24px;
+  grid-template-columns: minmax(0, 1.5fr) 180px 300px;
+  gap: 28px;
   align-items: start;
 }
 
 .tool-content{
   min-width: 0;
-  max-width: 100%;
+}
+
+.tool-content h4{
+  margin: 0 0 12px;
 }
 
 .tool-content ul{
-  margin: 10px 0 0;
-  padding-left: 20px;
+  margin: 0 0 18px;
+  padding-left: 22px;
 }
 
 .tool-content li{
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  line-height: 1.45;
 }
 
-.tool-timer{
-  min-width: 0;
+.tool-content p{
+  margin: 0 0 14px;
+  line-height: 1.45;
 }
 
-.tool-side{
+.tool-media-col{
   display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .tool-media{
@@ -1208,27 +1135,113 @@ dialog{
 .tool-media img{
   display: block;
   width: 100%;
-  max-width: 150px;
+  max-width: 180px;
   height: auto;
   border-radius: 12px;
   border: 1px solid var(--line);
+}
+
+.tool-timer-col{
+  min-width: 0;
+}
+
+.tool-timer{
+  width: 100%;
 }
 
 .tool-timer-block{
   width: 100%;
 }
 
-.tool-timer-block h4,
-.tool-content h4{
-  margin-top: 0;
+.tool-timer-block h4{
+  margin: 0 0 14px;
+  text-align: center;
 }
 
-#toolModal{
-  width: min(1100px, 94vw);
+@media (max-width: 980px){
+  .nav-inner{
+    flex-wrap: wrap;
+  }
+  .nav-left{
+    flex-wrap: wrap;
+  }
+  .nav-right{
+    width: 100%;
+    align-items: stretch;     
+  }
+
+  .nav-actions{
+    justify-content: flex-end;
+    flex-wrap: wrap;          
+  }
+
+  .nav-right .search{
+    width: 100%;
+    max-width: 520px;
+    min-width: 0;
+  }
+    #toolModal{
+    width: min(94vw, 760px);
+  }
+
+  #toolModal .modal{
+    padding: 22px 20px;
+  }
+
+  .tool-layout{
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .tool-media-col,
+  .tool-timer-col{
+    justify-content: center;
+  }
+
+  .tool-media img{
+    max-width: 220px;
+  }
 }
 
-#toolModal .modal{
-  width: 100%;
+@media (max-width: 640px){
+  .nav-inner{
+    flex-wrap: wrap;
+    gap: 10px; 
+  }
+  .nav-left{
+  display: flex;  
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  min-width: 0;
+  }
+
+.nav-right{
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  gap: 10px;
+  min-width: 0px;             
+  }
+
+  .nav-actions{
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px; 
+  }
+
+  .nav-right .search{
+    width: 98%;
+    max-width: 540px;
+    min-width: 0;
+  }
+  .nav-right .search input,
+  input[type="search"],
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select{
+    font-size: 16px !important;
+  } 
 }
-
-
