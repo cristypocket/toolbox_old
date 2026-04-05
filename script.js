@@ -1531,8 +1531,16 @@ function openTool(id){
       <span class="chip">${escapeHtml(toolText(tool,"position") || "")}</span>
     `;
    }
-
-  const steps = toolArray(tool,"steps").map(s => `<li>${escapeHtml(s)}</li>`).join("");
+   
+   const steps = toolArray(tool,"steps").map(s => `<li>${escapeHtml(s)}</li>`).join("");
+   
+   const mediaHtml = tool.media?.src
+      ? `
+    <div class="tool-media">
+      <img src="${escapeHtml(tool.media.src)}" alt="${escapeHtml(tool.media.alt || toolText(tool,"title") || "")}">
+    </div>
+  `
+  : "";
 
   if(modalBody){
   modalBody.innerHTML = `
@@ -1570,13 +1578,7 @@ function openTool(id){
          timerMount.innerHTML = "";
       }
    }
-  const mediaHtml = tool.media?.src
-  ? `
-    <div class="tool-media">
-      <img src="${escapeHtml(tool.media.src)}" alt="${escapeHtml(tool.media.alt || toolText(tool,"title") || "")}">
-    </div>
-  `
-  : ""; 
+ 
   safeShowModal(toolModal);
 }
 
