@@ -1545,7 +1545,6 @@ function openTool(id){
     <div class="tool-layout">
 
       <div class="tool-content">
-      ${mediaHtml}
       <h4>${escapeHtml(t("steps"))}</h4>
       <ul>${steps}</ul>
       
@@ -1555,6 +1554,10 @@ function openTool(id){
       </div>
 
       <div id="toolTimerMount" class="tool-timer"></div>
+
+      <div class=tool-media">
+      ${mediaHtml}
+      </div>
 
     </div>
   `;
