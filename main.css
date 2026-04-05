@@ -523,32 +523,68 @@ details.drop > summary:focus-visible{
 }
 
 .tool-layout {
-   display: flex;
-   gap: 50px;
-   align-items: flex-start;
+   display: grid;
+   grid-template-columns: minmax(0, 1.6fr) minmax(280px, 360px);
+   gap: 28px;
+   align-items: start;
 }
 
-.tool-content {
-  flex: 2;
+.tool-content{
   min-width: 0;
 }
 
-.tool-timer {
-   flex: 1;
-  width: 260px;
-  flex-shrink: 0;
+.tool-content ul{
+  margin: 10px 0 0;
+  padding-left: 20px;
 }
 
-.tool-media {
-  margin: 0 0 16px;
+.tool-content li{
+  margin-bottom: 8px;
 }
 
-.tool-media img {
+.tool-timer{
+  min-width: 0;
+}
+
+.tool-side{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+.tool-media{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.tool-media img{
   display: block;
   width: 100%;
-  max-width: 320px;
+  max-width: 150px;
+  height: auto;
   border-radius: 12px;
   border: 1px solid var(--line);
+}
+
+.tool-timer-block{
+  width: 100%;
+}
+
+.tool-timer-block h4,
+.tool-content h4{
+  margin-top: 0;
+}
+
+#toolModal .modal{
+  max-width: 980px;
+  width: min(980px, 92vw);
+}
+
+#toolModal{
+  max-width: 980px;
+  width: min(980px, 92vw);
 }
 
 
@@ -592,13 +628,20 @@ details.drop > summary:focus-visible{
   min-width: 0;
   }
 
-   .tool-layout {
-      flex-direction: column;
-      gap: 0px;
+  .tool-layout{
+    grid-template-columns: 1fr;
   }
 
-  .tool-timer {
-    width: 100%;
+  .tool-side{
+    align-items: stretch;
+  }
+
+  .tool-media{
+    justify-content: flex-start;
+  }
+
+  .tool-media img{
+    max-width: 180px;
   }
    
 }
