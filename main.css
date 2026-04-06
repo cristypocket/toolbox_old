@@ -1074,12 +1074,12 @@ dialog{
 #toolModal{
   width: min(1180px, 94vw);
   max-height: 92vh;
-  padding: 3px;
+  padding: 6px;
 }
 
 #toolModal .modal{
   width: 100%;
-  padding: 10px 32px;
+  padding: 18px 32px;
   max-height: 92vh;
   overflow-y: auto;
   overflow-x: auto;
